@@ -122,18 +122,13 @@ export default {
             //if run in to a piece that is a queen or rook before own piece
             if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 4){
                 in_check = true;
-                break;
+                return in_check;
             }
             //if a piece has been run in to and its not own side and is not rook or queen then
             //must be enemy peice and not giving check
             if(Math.abs(loc_check) != 0){
                 break;
             }
-        }
-
-        if (in_check){
-            console.log("check!");
-            return true;
         }
 
         //check right from square one right of king to end of board
@@ -150,7 +145,7 @@ export default {
             //if run in to a piece that is a queen or rook before own piece
             if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 4){
                 in_check = true;
-                break;
+                return in_check;
             }
             //if a piece has been run in to and its not own side and is not rook or queen then
             //must be enemy peice and not giving check
@@ -162,6 +157,187 @@ export default {
         if (in_check){
             console.log("check!");
             return true;
+        }
+
+        //check from one square up to the end of the board
+        for(let i = king_loc[0] + 1; i < 12; i++){
+            loc_check = board[i][king_loc[1]];
+            //if out of the board
+            if(loc_check == 99){
+                break;
+            }
+            //if piece is on own side
+            if(Math.sign(loc_check) == Math.sign(s)){
+                break;
+            }
+            //if run in to a piece that is a queen or rook before own piece
+            if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 4){
+                in_check = true;
+                return in_check;
+            }
+            //if a piece has been run in to and its not own side and is not rook or queen then
+            //must be enemy peice and not giving check
+            if(Math.abs(loc_check) != 0){
+                break;
+            }
+        }
+
+        //check from one square down to the end of the board
+        for(let i = king_loc[0] - 1; i > 0; i--){
+            loc_check = board[i][king_loc[1]];
+            //if out of the board
+            if(loc_check == 99){
+                break;
+            }
+            //if piece is on own side
+            if(Math.sign(loc_check) == Math.sign(s)){
+                break;
+            }
+            //if run in to a piece that is a queen or rook before own piece
+            if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 4){
+                in_check = true;
+                return in_check;
+            }
+            //if a piece has been run in to and its not own side and is not rook or queen then
+            //must be enemy peice and not giving check
+            if(Math.abs(loc_check) != 0){
+                break;
+            }
+        }
+
+        //look diagonally down and to the right for a bishop or queen
+        for(let i = 1; i < 8; i++){
+            loc_check = board[king_loc[0] + i][king_loc[1] + i];
+            //console.log("HELLO?", loc_check);
+            //if our of board
+            if(loc_check == 99){
+                break;
+            }
+            //if piece is on own side
+            if(Math.sign(loc_check) == Math.sign(s)){
+                break;
+            }
+            //if run in to a piece that is a queen or bishop before own piece
+            if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 3){
+                in_check = true;
+                return in_check;
+            }
+            //if a piece has been run in to and its not own side and is not rook or queen then
+            //must be enemy peice and not giving check
+            if(Math.abs(loc_check) != 0){
+                break;
+            }
+        }
+
+        //look diagonally up and to the right for a bishop or queen
+        for(let i = 1; i < 8; i++){
+            loc_check = board[king_loc[0] - i][king_loc[1] + i];
+            //console.log("HELLO?", loc_check);
+            //if our of board
+            if(loc_check == 99){
+                break;
+            }
+            //if piece is on own side
+            if(Math.sign(loc_check) == Math.sign(s)){
+                break;
+            }
+            //if run in to a piece that is a queen or bishop before own piece
+            if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 3){
+                in_check = true;
+                return in_check;
+            }
+            //if a piece has been run in to and its not own side and is not rook or queen then
+            //must be enemy peice and not giving check
+            if(Math.abs(loc_check) != 0){
+                break;
+            }
+        }
+
+        //look diagonally up and to the left for a bishop or queen
+        for(let i = 1; i < 8; i++){
+            loc_check = board[king_loc[0] - i][king_loc[1] - i];
+            //console.log("HELLO?", loc_check);
+            //if our of board
+            if(loc_check == 99){
+                break;
+            }
+            //if piece is on own side
+            if(Math.sign(loc_check) == Math.sign(s)){
+                break;
+            }
+            //if run in to a piece that is a queen or bishop before own piece
+            if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 3){
+                in_check = true;
+                return in_check;
+            }
+            //if a piece has been run in to and its not own side and is not rook or queen then
+            //must be enemy peice and not giving check
+            if(Math.abs(loc_check) != 0){
+                break;
+            }
+        }
+
+        //look diagonally down and to the left for a bishop or queen
+        for(let i = 1; i < 8; i++){
+            loc_check = board[king_loc[0] + i][king_loc[1] - i];
+            //console.log("HELLO?", loc_check);
+            //if our of board
+            if(loc_check == 99){
+                break;
+            }
+            //if piece is on own side
+            if(Math.sign(loc_check) == Math.sign(s)){
+                break;
+            }
+            //if run in to a piece that is a queen or bishop before own piece
+            if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 3){
+                in_check = true;
+                return in_check;
+            }
+            //if a piece has been run in to and its not own side and is not rook or queen then
+            //must be enemy peice and not giving check
+            if(Math.abs(loc_check) != 0){
+                break;
+            }
+        }
+
+        //check for an enemy knight
+        /*
+        need to check 8 squares in an L shape around the king
+            j-1     j+1
+            i-2     i-2
+        j-2             j+2
+        i-1             i-1
+                king
+                king
+        j-2             j+2
+        i+1             i+1
+            j-1     j+1
+            i+2     i+2
+        
+        */
+        let i = king_loc[0];
+        let j = king_loc[1];
+
+        if (board[i-2][j-1] == (2*-1*s)){return true;}
+        if (board[i-2][j+1] == (2*-1*s)){return true;}
+        if (board[i-1][j-2] == (2*-1*s)){return true;}
+        if (board[i-1][j+2] == (2*-1*s)){return true;}
+        if (board[i+1][j-2] == (2*-1*s)){return true;}
+        if (board[i+1][j+2] == (2*-1*s)){return true;}
+        if (board[i+2][j-1] == (2*-1*s)){return true;}
+        if (board[i+2][j+1] == (2*-1*s)){return true;}
+
+        //check for a pawn
+
+        //if white
+        if (s == 1){
+            if (board[i-1][j+1] == (-1)){return true;}
+            if (board[i-1][j-1] == (-1)){return true;}
+        }
+        if (s == -1){
+            if (board[i+1][j+1] == (1)){return true;}
+            if (board[i+1][j-1] == (1)){return true;}
         }
 
         return in_check;

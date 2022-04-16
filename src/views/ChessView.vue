@@ -1,7 +1,6 @@
 <template>
   <section class="play-area">
     <div class = "gameplay-buttons">
-            <p class = "flip">flip</p>
             <p class = "check-indicator">In check? {{inCheck}}</p>
     </div>
     <div class = "board">
