@@ -342,7 +342,11 @@ export default {
 
         return in_check;
 
-    }
+    },
+
+    //checkLegalMove(board, active_i, active_j, target_i, target_j){
+    //    
+    //}
 
     
 

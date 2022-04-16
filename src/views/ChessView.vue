@@ -1,7 +1,11 @@
 <template>
   <section class="play-area">
     <div class = "gameplay-buttons">
-            <p class = "check-indicator">In check? {{inCheck}}</p>
+            <p>In check? {{inCheck}} <br>
+              Turn: {{playerTurn}} <br>
+              Error: {{error}}
+
+            </p>
     </div>
     <div class = "board">
         <div v-if="active_board">
@@ -28,7 +32,9 @@
     data() {
       return {
         active_board: null,
-        active_square: null
+        active_square: null,
+        side: 1,
+        error: ""
       }
     },
     computed: {
@@ -38,6 +44,7 @@
           return val.slice(2,10)
         })
       },
+
       inCheck(){
         if (this.active_board != null){
           //if either king is in check
@@ -45,7 +52,16 @@
         } else {
           return true;
         }
+      },
+
+      playerTurn(){
+        if (this.side == 1){
+          return "white";
+        } else {
+          return "black";
+        }
       }
+
     },
     mounted(){
         this.active_board = chess.generateEmptyBoard()
@@ -114,7 +130,7 @@
             this.active_board[active_row+2][active_col+2] = 0;
           }
           
-          //done making the move so set the active square to null
+          //done making the move so set the active square to false
           this.active_square.setAttribute("active","false");
           this.active_square = null;
         }
@@ -136,7 +152,7 @@
     font-size: xx-large;
     font-weight: 600;
     display: grid;
-    grid-template-columns: 100px auto;
+    grid-template-columns: 150px auto;
   }
 
   .gameplay-buttons p{
