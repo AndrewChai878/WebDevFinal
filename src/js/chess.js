@@ -74,6 +74,98 @@ export default {
         board[offset][offset+7] = -4
     
         return board;
+    },
+
+    kingInCheck(board, s){
+        /*
+        This is gonna be quite the big boy function 
+        The point of it is to check to see if there is a king in check  
+        
+        logic flow:
+        Looks left to right from the king for a rook or a queen
+        Looks up and down from the king for a rook or a queen
+        Looks diagonally for a queen or bishop
+        Looks for a knight in an L shape away from the king 
+        
+        note: it returns if in check after each search to make sure it doesn't keep looking
+            because if you're in check your're in check! more than 1 check is still check.
+        */
+        let in_check = false;
+        let king_loc = [null,null];
+        let loc_check;
+
+        //find the current location of the king
+        //king value is either 6 or -6, s is 1 or -1
+        //6 * side will give us either black or white king
+        for(let i = 0; i < 12; i++){
+            for(let j = 0; j < 12; j++){
+                if(board[i][j] == 6*s){
+                    king_loc = [i,j];
+                }
+            }
+        }
+
+        //check if an enemy rook or queen can take current king
+        //horizontally or veritcally
+
+        //check left from square one left of king all the way to end of board
+        for(let i = king_loc[1] - 1; i > 0; i--){
+            loc_check = board[king_loc[0]][i];
+            //if out of the board
+            if(loc_check == 99){
+                break;
+            }
+            //if piece is on own side
+            if(Math.sign(loc_check) == Math.sign(s)){
+                break;
+            }
+            //if run in to a piece that is a queen or rook before own piece
+            if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 4){
+                in_check = true;
+                break;
+            }
+            //if a piece has been run in to and its not own side and is not rook or queen then
+            //must be enemy peice and not giving check
+            if(Math.abs(loc_check) != 0){
+                break;
+            }
+        }
+
+        if (in_check){
+            console.log("check!");
+            return true;
+        }
+
+        //check right from square one right of king to end of board
+        for(let i = king_loc[1] + 1; i < 12; i++){
+            loc_check = board[king_loc[0]][i];
+            //if out of the board
+            if(loc_check == 99){
+                break;
+            }
+            //if piece is on own side
+            if(Math.sign(loc_check) == Math.sign(s)){
+                break;
+            }
+            //if run in to a piece that is a queen or rook before own piece
+            if(Math.abs(loc_check) == 5 || Math.abs(loc_check) == 4){
+                in_check = true;
+                break;
+            }
+            //if a piece has been run in to and its not own side and is not rook or queen then
+            //must be enemy peice and not giving check
+            if(Math.abs(loc_check) != 0){
+                break;
+            }
+        }
+
+        if (in_check){
+            console.log("check!");
+            return true;
+        }
+
+        return in_check;
+
     }
 
     
