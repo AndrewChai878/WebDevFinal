@@ -1,3 +1,4 @@
+
 export default {
 
     //function for creating a 12x12 array to hold the internal 8x8 board with a padding
@@ -44,36 +45,37 @@ export default {
     
         //set white pawns
         for (let i = 0; i < 8; i++){
-            board[i+offset][1+offset] = 1; 
+            board[6+offset][i+offset] = 1; 
         }
     
         //set black pawns
         for (let i = 0; i < 8; i++){
-            board[i+offset][6+offset] = -1; 
+            board[1+offset][i+offset] = -1; 
         }
     
         //set white peices 
-        board[offset][offset] = 4
-        board[offset+1][offset] = 2
-        board[offset+2][offset] = 3
-        board[offset+3][offset] = 5
-        board[offset+4][offset] = 6
-        board[offset+5][offset] = 3
-        board[offset+6][offset] = 2
         board[offset+7][offset] = 4
+        board[offset+7][offset+1] = 2
+        board[offset+7][offset+2] = 3
+        board[offset+7][offset+3] = 5
+        board[offset+7][offset+4] = 6
+        board[offset+7][offset+5] = 3
+        board[offset+7][offset+6] = 2
+        board[offset+7][offset+7] = 4
     
         //set black pieces
+        board[offset][offset] = -4
+        board[offset][offset+1] = -2
+        board[offset][offset+2] = -3
+        board[offset][offset+3] = -5
+        board[offset][offset+4] = -6
+        board[offset][offset+5] = -3
+        board[offset][offset+6] = -2
         board[offset][offset+7] = -4
-        board[offset+1][offset+7] = -2
-        board[offset+2][offset+7] = -3
-        board[offset+3][offset+7] = -5
-        board[offset+4][offset+7] = -6
-        board[offset+5][offset+7] = -3
-        board[offset+6][offset+7] = -2
-        board[offset+7][offset+7] = -4
     
         return board;
     }
 
+    
 
 }
