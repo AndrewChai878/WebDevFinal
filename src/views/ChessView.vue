@@ -36,7 +36,11 @@
         active_board: null,
         active_square: null,
         side: 1,
-        error: ""
+        error: "",
+        //keep track if rooks or kings have moved
+        //for the sake of castling
+        have_kings_moved: [false,false],
+        have_rooks_moved: [false,false,false,false]
       }
     },
     computed: {
@@ -76,7 +80,7 @@
         return (chess.isGameOver(this.active_board, -1))
         }
         return "false"
-      }
+      },
 
 
     },
@@ -139,6 +143,13 @@
           let target_squares = chess.getPotentialMoves(this.active_board, active_row, active_col);
           //prune illegal moves
           target_squares = chess.pruneIllegalMoves(this.active_board, active_row, active_col, target_squares);
+          //if the piece moving is a king add castling as legal moves
+          if (Math.abs(this.active_board[active_row+2][active_col+2]) == 6){
+            let castling_moves = chess.getLegalCastling(this.active_board, this.side, this.have_kings_moved, this.have_rooks_moved);
+            for (let i = 0; i < castling_moves.length; i++){
+              target_squares.push(castling_moves[i]);
+            }
+          }
           //map to coords
           target_squares = target_squares.map(x => [x[0]-2,x[1]-2])
           console.log(target_squares);
@@ -155,9 +166,11 @@
         //if there is an active square then this square is the target
         //get the legal moves for the active square
         //check to see if the target is a legal move
+        //update flags if either a rook or king is moving
         //move the active square to the target
         //clear the highlighted squares
         //flip the side
+        
         else if (this.active_square != null && this.active_square != square){
           let target_col = square.cellIndex;
           let target_row = square.parentNode.rowIndex;
@@ -170,6 +183,13 @@
           //get legal moves of active piece
           let potential_moves = chess.getPotentialMoves(this.active_board, active_row, active_col);
           let legal_moves = chess.pruneIllegalMoves(this.active_board, active_row, active_col, potential_moves);
+          //if the piece moving is a king add castling as legal moves
+          if (Math.abs(this.active_board[active_row+2][active_col+2]) == 6){
+            let castling_moves = chess.getLegalCastling(this.active_board, this.side, this.have_kings_moved, this.have_rooks_moved);
+            for (let i = 0; i < castling_moves.length; i++){
+              legal_moves.push(castling_moves[i]);
+            }
+          }
 
           //check to see if the target is in the legal move list
           console.log("legal moves", legal_moves);
@@ -191,12 +211,67 @@
             return;
           }
 
+          //if the moving piece is a king change flag
+          if (this.active_board[active_row+2][active_col+2] == 6){
+            console.log("moved king");
+            this.have_kings_moved[0] = true;
+          }
+          if (this.active_board[active_row+2][active_col+2] == -6){
+            console.log("moved king");
+            this.have_kings_moved[1] = true;
+          }
+
+          //if the moving piece is a rook change flag
+          if (active_row == 0 && active_col == 0){
+            console.log("moved rook");
+            this.have_rooks_moved[0] = true;
+          }
+          if (active_row == 0 && active_col == 7){
+            console.log("moved rook");
+            this.have_rooks_moved[1] = true;
+          }
+          if (active_row == 7 && active_col == 0){
+            console.log("moved rook");
+            this.have_rooks_moved[2] = true;
+          }
+          if (active_row == 7 && active_col == 7){
+            console.log("moved rook");
+            this.have_rooks_moved[3] = true;
+          }
+
           //if pieces aren't on the same side
           if (Math.sign(this.active_board[target_row+2][target_col+2]) != Math.sign(this.active_board[active_row+2][active_col+2])){
-            //move the active square's value to the target's location
-            this.active_board[target_row+2][target_col+2] = this.active_board[active_row+2][active_col+2];
-            //piece has moved out of square fill with 0
-            this.active_board[active_row+2][active_col+2] = 0;
+            //if castling
+            if (this.active_board[active_row+2][active_col+2] == 6 && active_col+2 == 6 && target_col+2 == 8){
+              this.active_board[9][9] = 0;
+              this.active_board[9][6] = 0;
+              this.active_board[9][8] = 6;
+              this.active_board[9][7] = 4;
+            }
+            else if (this.active_board[active_row+2][active_col+2] == 6 && active_col+2 == 6 && target_col+2 == 4){
+              this.active_board[9][2] = 0;
+              this.active_board[9][6] = 0;
+              this.active_board[9][4] = 6;
+              this.active_board[9][5] = 4;
+            }
+            else if (this.active_board[active_row+2][active_col+2] == -6 && active_col+2 == 6 && target_col+2 == 8){
+              this.active_board[2][9] = 0;
+              this.active_board[2][6] = 0;
+              this.active_board[2][8] = -6;
+              this.active_board[2][7] = -4;
+            }
+            else if (this.active_board[active_row+2][active_col+2] == -6 && active_col+2 == 6 && target_col+2 == 4){
+              this.active_board[2][2] = 0;
+              this.active_board[2][6] = 0;
+              this.active_board[2][4] = -6;
+              this.active_board[2][5] = -4;
+            } else {
+              //move the active square's value to the target's location
+              this.active_board[target_row+2][target_col+2] = this.active_board[active_row+2][active_col+2];
+              //piece has moved out of square fill with 0
+              this.active_board[active_row+2][active_col+2] = 0;
+            }
+
           }
           
           //done making the move so set the active square to false
@@ -215,6 +290,8 @@
           } else {
             this.side = 1;
           }
+
+          
 
         }
       }

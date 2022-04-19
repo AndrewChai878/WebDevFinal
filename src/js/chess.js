@@ -682,6 +682,161 @@ export default {
         else{
             return "False";
         }
+    },
+
+    //check to see if castling is legal
+    //take in the board, king which is to move, king flags, rook flags
+    //return legal castling options
+    getLegalCastling(board, side, king_flags, rook_flags){
+        let legal_king_destinations = [];
+        let temp_board = [];
+        let would_be_check = false;
+        for (let k = 0; k < board.length; k++){
+            temp_board[k] = board[k].slice();
+        }
+        
+        if (side == 1){
+            //if the king has moved return empty moves
+            if (king_flags[0] != false){
+                return legal_king_destinations;
+            }
+            //if queen's rook hasnt moved
+            //reset the temp board
+            for (let k = 0; k < board.length; k++){
+                temp_board[k] = board[k].slice();
+            }
+            if (rook_flags[2] == false){
+                //check to see the squares needed are empty
+                if ((temp_board[9][3] == 0) && (temp_board[9][4] == 0) && (temp_board[9][5] == 0)){
+                    //check to see if the king is in check or would move in to check
+                    would_be_check = false;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[9][5] = 6;
+                    temp_board[9][6] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[9][4] = 6;
+                    temp_board[9][5] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[9][3] = 6;
+                    temp_board[9][4] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    //if no check then push the coords of queen side castling
+                    if (!would_be_check){
+                        legal_king_destinations.push([9,4]);
+                    }
+                }
+            }
+            //if king's rook hasnt moved
+            //reset the temp board
+            for (let k = 0; k < board.length; k++){
+                temp_board[k] = board[k].slice();
+            }
+            if (rook_flags[3] == false){
+                //check to see the squares needed are empty
+                if ((temp_board[9][7] == 0) && (temp_board[9][8] == 0)){
+                    //check to see if the king is in check or would move in to check
+                    would_be_check = false;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[9][7] = 6;
+                    temp_board[9][6] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[9][8] = 6;
+                    temp_board[9][7] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    //if no check then push the coords of queen side castling
+                    if (!would_be_check){
+                        legal_king_destinations.push([9,8]);
+                    }
+                }
+            }
+            return legal_king_destinations;
+        }
+        if (side == -1){
+            //if the king has moved return empty moves
+            if (king_flags[1] != false){
+                return legal_king_destinations;
+            }
+            //if queen's rook hasnt moved
+            //reset the temp board
+            for (let k = 0; k < board.length; k++){
+                temp_board[k] = board[k].slice();
+            }
+            if (rook_flags[0] == false){
+                //check to see the squares needed are empty
+                if ((temp_board[2][3] == 0) && (temp_board[2][4] == 0) && (temp_board[2][5] == 0)){
+                    //check to see if the king is in check or would move in to check
+                    would_be_check = false;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[2][5] = -6;
+                    temp_board[2][6] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[2][4] = -6;
+                    temp_board[2][5] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[2][3] = -6;
+                    temp_board[2][4] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    //if no check then push the coords of queen side castling
+                    if (!would_be_check){
+                        legal_king_destinations.push([2,4]);
+                    }
+                }
+            }
+            //if king's rook hasnt moved
+            //reset the temp board
+            for (let k = 0; k < board.length; k++){
+                temp_board[k] = board[k].slice();
+            }
+            if (rook_flags[1] == false){
+                //check to see the squares needed are empty
+                if ((temp_board[2][7] == 0) && (temp_board[2][8] == 0)){
+                    //check to see if the king is in check or would move in to check
+                    would_be_check = false;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[2][7] = -6;
+                    temp_board[2][6] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    temp_board[2][8] = -6;
+                    temp_board[2][7] = 0;
+                    if (this.kingInCheck(temp_board, side)){
+                        would_be_check = true;
+                    }
+                    //if no check then push the coords of queen side castling
+                    if (!would_be_check){
+                        legal_king_destinations.push([2,8]);
+                    }
+                }
+            }
+            return legal_king_destinations;
+        }
+
+
     }
 
 }
