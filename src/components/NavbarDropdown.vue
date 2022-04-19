@@ -4,7 +4,7 @@
         <div class="dropmenu" id="dropmenu">
             <div><router-link to="/chess">Chess</router-link></div>
             <div><router-link to="/">Game2</router-link></div>
-            <div><router-link to="/">Game3</router-link></div>
+            <div><router-link to="/checkers">Checkers</router-link></div>
         </div>
     </div>
     
