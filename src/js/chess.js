@@ -617,6 +617,20 @@ export default {
             piece = temp_board[i][j];
         }
         
+        //make sure taking the king is not in the list of legal moves
+        for (let k = 0; k < board.length; k++){
+            temp_board[k] = board[k].slice();
+        }
+        let k = legal_moves.length;
+        while (k--){
+            if (k < 0){
+                break;
+            }
+            if (Math.abs(temp_board[legal_moves[k][0]][legal_moves[k][1]]) == 6){
+                legal_moves.splice(k,1);
+            }
+        }
+        
         return legal_moves;
     },
 

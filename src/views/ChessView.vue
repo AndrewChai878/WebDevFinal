@@ -127,9 +127,15 @@
         //if there is no active square and selected square has a piece
         else if (this.active_square == null && square.firstChild){
           this.active_square = square;
-          this.active_square.setAttribute("active","true");
           let active_col = this.active_square.cellIndex;
           let active_row = this.active_square.parentNode.rowIndex;
+          //if the selected piece is of the wrong side return without doing anything
+          //(do not select the piece)
+          if (Math.sign(this.active_board[active_row+2][active_col+2]) != Math.sign(this.side)){
+            this.active_square = null;
+            return;
+          }
+          this.active_square.setAttribute("active","true");
           let target_squares = chess.getPotentialMoves(this.active_board, active_row, active_col);
           //prune illegal moves
           target_squares = chess.pruneIllegalMoves(this.active_board, active_row, active_col, target_squares);
@@ -147,7 +153,11 @@
           return;
         }
         //if there is an active square then this square is the target
+        //get the legal moves for the active square
+        //check to see if the target is a legal move
         //move the active square to the target
+        //clear the highlighted squares
+        //flip the side
         else if (this.active_square != null && this.active_square != square){
           let target_col = square.cellIndex;
           let target_row = square.parentNode.rowIndex;
@@ -155,6 +165,32 @@
           let active_row = this.active_square.parentNode.rowIndex;
           console.log("active square", this.active_board[target_row+2][target_col+2])
           console.log("target square", this.active_board[active_row+2][active_col+2])
+          
+
+          //get legal moves of active piece
+          let potential_moves = chess.getPotentialMoves(this.active_board, active_row, active_col);
+          let legal_moves = chess.pruneIllegalMoves(this.active_board, active_row, active_col, potential_moves);
+
+          //check to see if the target is in the legal move list
+          console.log("legal moves", legal_moves);
+          let is_legal = false;
+          for (let i = 0; i < legal_moves.length; i++){
+            if ((legal_moves[i][0] == target_row+2) && (legal_moves[i][1] == target_col+2)){
+              is_legal = true;
+            }
+          }
+
+          //if the move isnt legal clear all the highlights and unset the active piece
+          if (!is_legal){
+            let target_squares = document.querySelectorAll('[target="true"]');
+            for (let i = 0; i < target_squares.length; i++){
+              target_squares[i].setAttribute("target","false")
+            }
+            this.active_square.setAttribute("active","false");
+            this.active_square = null;
+            return;
+          }
+
           //if pieces aren't on the same side
           if (Math.sign(this.active_board[target_row+2][target_col+2]) != Math.sign(this.active_board[active_row+2][active_col+2])){
             //move the active square's value to the target's location
@@ -171,6 +207,13 @@
           let target_squares = document.querySelectorAll('[target="true"]');
           for (let i = 0; i < target_squares.length; i++){
             target_squares[i].setAttribute("target","false")
+          }
+
+          //change the side
+          if (this.side == 1){
+            this.side = -1;
+          } else {
+            this.side = 1;
           }
 
         }
