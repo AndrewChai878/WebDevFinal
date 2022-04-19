@@ -3,7 +3,9 @@
     <div class = "gameplay-buttons">
             <p>In check? {{inCheck}} <br>
               Turn: {{playerTurn}} <br>
-              Error: {{error}}
+              Error: {{error}} <br>
+              Gameover For White: {{overWhite}} <br>
+              Gameover For Black: {{overBlack}}
 
             </p>
     </div>
@@ -60,7 +62,22 @@
         } else {
           return "black";
         }
+      },
+
+      overWhite(){
+        if (this.active_board != null){
+        return (chess.isGameOver(this.active_board, 1))
+        }
+        return "false"
+      },
+
+      overBlack(){
+        if (this.active_board != null){
+        return (chess.isGameOver(this.active_board, -1))
+        }
+        return "false"
       }
+
 
     },
     mounted(){
@@ -113,7 +130,9 @@
           this.active_square.setAttribute("active","true");
           let active_col = this.active_square.cellIndex;
           let active_row = this.active_square.parentNode.rowIndex;
-          let target_squares = chess.getPotentialMoves(this.active_board,active_row,active_col);
+          let target_squares = chess.getPotentialMoves(this.active_board, active_row, active_col);
+          //prune illegal moves
+          target_squares = chess.pruneIllegalMoves(this.active_board, active_row, active_col, target_squares);
           //map to coords
           target_squares = target_squares.map(x => [x[0]-2,x[1]-2])
           console.log(target_squares);

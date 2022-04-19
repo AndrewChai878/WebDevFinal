@@ -155,7 +155,7 @@ export default {
         }
 
         if (in_check){
-            console.log("check!");
+            //console.log("check!");
             return true;
         }
 
@@ -360,8 +360,8 @@ export default {
         queen = 5
         king = 6
         */
-        console.log(i,j)
-        console.log(board[i][j])
+        //console.log(i,j)
+        //console.log(board[i][j])
     
         let offset = 2;
         i = i+offset;
@@ -369,8 +369,8 @@ export default {
         let potential_moves = [];
         let source = board[i][j];
 
-        console.log(i,j)
-        console.log(board[i][j])
+        //console.log(i,j)
+        //console.log(board[i][j])
 
         
         //if the source square is empty return an empty array
@@ -560,7 +560,7 @@ export default {
             if ((Math.abs(source) != board[i-1][j+1]) && board[i-1][j+1] != 99 && (board[i-1][j+1] != 0)){
                 potential_moves.push([i-1,j+1]);
             }
-            return potential_moves
+            return potential_moves;
         }
         //black pawn
         if (source == -1){
@@ -580,12 +580,95 @@ export default {
             if ((Math.abs(source) != board[i+1][j+1]) && (board[i+1][j+1] != 99) && (board[i+1][j+1] != 0)){
                 potential_moves.push([i+1,j+1]);
             }
-            return potential_moves
+            return potential_moves;
+        }
+
+        return potential_moves;
+        
+    },
+    //once we have candidate moves we need to prune the ones which would leave us in check
+    //take in the board, indices of piece to move and array of potential moves
+    //return a list of legal moves from the potential moves
+    pruneIllegalMoves(board, i, j, potential_moves){
+        let offset = 2;
+        i = i+offset;
+        j = j+offset;
+        let temp_board = [];
+        for (let k = 0; k < board.length; k++){
+            temp_board[k] = board[k].slice();
+        }
+        //console.log(temp_board);
+        let piece = temp_board[i][j];
+        let side = Math.sign(piece)*1;
+        let legal_moves = [];
+        //for every potential move make the move on the temp board
+        //see if the side that is moving is in check
+        //if there is no check then the move is legal
+        for (let k = 0; k < potential_moves.length; k++){
+            let move = potential_moves[k];
+            temp_board[move[0]][move[1]] = piece;
+            temp_board[i][j] = 0;
+            if (!this.kingInCheck(temp_board, side)){
+                legal_moves.push(move);
+            }
+            for (let k = 0; k < board.length; k++){
+                temp_board[k] = board[k].slice();
+            }
+            piece = temp_board[i][j];
         }
         
-    }
+        return legal_moves;
+    },
 
-    
+    //get all legal moves in a postition for a side
+    //takes in current board and side to check for
+    //returns an array of all legal moves in the position
+    getAllLegalMoves(board, side){
+        let temp_board = [];
+        for (let k = 0; k < board.length; k++){
+            temp_board[k] = board[k].slice();
+        }
+        let legal_moves = [];
+        
+        //look through every piece on the board
+        for (let i = 0; i < 12; i ++){
+            for (let j = 0; j < 12; j++){
+                //if it is a piece of the correct side
+                if (Math.sign(temp_board[i][j]) == Math.sign(side) && temp_board[i][j] != 0 && temp_board[i][j] != 99){
+                    //get every potential move
+                    let potential_moves = this.getPotentialMoves(temp_board, i-2, j-2);
+                    //prune illegal moves
+                    potential_moves = this.pruneIllegalMoves(temp_board, i-2 , j-2, potential_moves);
+                    //append any legal moves to the legal moves array
+                    for (let k = 0; k < potential_moves.length; k++){
+                        legal_moves.push(potential_moves.slice()[k]);
+                    }
+                }
+            }
+        }
+
+        return legal_moves;
+    },
+
+    //check if game is over
+    //take in board and side that's turn it is
+    //returns "false" if game is not over "checkmate" or "stalemate"
+    isGameOver(board, side){
+        let temp_board = [];
+        for (let k = 0; k < board.length; k++){
+            temp_board[k] = board[k].slice();
+        }
+        let legal_moves = this.getAllLegalMoves(temp_board, side);
+        if (legal_moves.length == 0 && this.kingInCheck(board, side)){
+            return "Checkmate";
+        }
+        else if (legal_moves.length == 0 && !this.kingInCheck(board, side)){
+            return "Stalemate";
+        }
+        else{
+            return "False";
+        }
+    }
 
 }
 
