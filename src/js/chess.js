@@ -344,10 +344,278 @@ export default {
 
     },
 
-    //checkLegalMove(board, active_i, active_j, target_i, target_j){
-    //    
-    //}
+    
+    //This function takes in the game board and the i and j coord of a piece
+    //Return an array of tuples which contain potential targets for that piece
+    //This array will need to be pruned by seeing if the move will lead to check
+    getPotentialMoves(board, i, j){
+        /*
+        Squares represented as 0
+        Actual pieces represented as integers
+        Positive integers for white negative for black
+        pawn = 1
+        knight = 2
+        bishop = 3
+        rook = 4
+        queen = 5
+        king = 6
+        */
+        console.log(i,j)
+        console.log(board[i][j])
+    
+        let offset = 2;
+        i = i+offset;
+        j = j+offset;
+        let potential_moves = [];
+        let source = board[i][j];
+
+        console.log(i,j)
+        console.log(board[i][j])
+
+        
+        //if the source square is empty return an empty array
+        if (source == 0){
+            return potential_moves;
+        }   
+        //if the piece in the square is a king return the squares that are empty
+        //or are enemy
+        //king needs to look 1 square in all directions
+        if (Math.abs(source) == 6){
+            if (enemyOrEmpty(source, board[i+1][j+1])){potential_moves.push([i+1,j+1])}
+            if (enemyOrEmpty(source, board[i+1][j])){potential_moves.push([i+1,j])}
+            if (enemyOrEmpty(source, board[i+1][j-1])){potential_moves.push([i+1,j-1])}
+            if (enemyOrEmpty(source, board[i][j-1])){potential_moves.push([i,j-1])}
+            if (enemyOrEmpty(source, board[i][j+1])){potential_moves.push([i,j+1])}
+            if (enemyOrEmpty(source, board[i-1][j+1])){potential_moves.push([i-1,j+1])}
+            if (enemyOrEmpty(source, board[i-1][j])){potential_moves.push([i-1,j])}
+            if (enemyOrEmpty(source, board[i-1][j-1])){potential_moves.push([i-1,j-1])}
+        
+            //return because piece can only be of one type
+            return potential_moves;
+        }
+
+        //queen needs to look all the way in all directions
+        //until she hits a friendly piece, enemy piece or end of board
+        if (Math.abs(source) == 5){
+            //look up
+            for (let k = i-1; k > 0; k--){
+                if (enemyOrEmpty(source, board[k][j])){potential_moves.push([k,j]);}
+                else {break;}
+                if (enemyPiece(source, board[k][j])){break;}
+            }
+            //look down
+            for (let k = i+1; k < 12; k++){
+                if (enemyOrEmpty(source, board[k][j])){potential_moves.push([k,j]);}
+                else {break;}
+                if (enemyPiece(source, board[k][j])){break;}
+            }
+            //look left
+            for (let k = j-1; k > 0; k--){
+                if (enemyOrEmpty(source, board[i][k])){potential_moves.push([i,k]);}
+                else {break;}
+                if (enemyPiece(source, board[i][k])){break;}
+            }
+            //look right
+            for (let k = j+1; k < 12; k++){
+                if (enemyOrEmpty(source, board[i][k])){potential_moves.push([i,k]);}
+                else {break;}
+                if (enemyPiece(source, board[i][k])){break;}
+            }
+            //look diagonal up to the left
+            for(let k = 1; k < 8; k++){
+                if (enemyOrEmpty(source, board[i-k][j-k])){potential_moves.push([i-k,j-k]);}
+                else {break;}
+                if (enemyPiece(source, board[i-k][j-k])){break;}
+            }
+            //look diagonal up to the right
+            for(let k = 1; k < 8; k++){
+                if (enemyOrEmpty(source, board[i-k][j+k])){potential_moves.push([i-k,j+k]);}
+                else {break;}
+                if (enemyPiece(source, board[i-k][j+k])){break;}
+            }
+            //look diagonal down to the left
+            for(let k = 1; k < 8; k++){
+                if (enemyOrEmpty(source, board[i+k][j-k])){potential_moves.push([i+k,j-k]);}
+                else {break;}
+                if (enemyPiece(source, board[i+k][j-k])){break;}
+            }
+            //look diagonal down to the right
+            for(let k = 1; k < 8; k++){
+                if (enemyOrEmpty(source, board[i+k][j+k])){potential_moves.push([i+k,j+k]);}
+                else {break;}
+                if (enemyPiece(source, board[i+k][j+k])){break;}
+            }
+
+            return potential_moves;
+
+        }
+
+        //if rook look left, right, up, down
+        if (Math.abs(source) == 4) {
+            //look up
+            for (let k = i-1; k > 0; k--){
+                if (enemyOrEmpty(source, board[k][j])){potential_moves.push([k,j]);}
+                else {break;}
+                if (enemyPiece(source, board[k][j])){break;}
+            }
+            //look down
+            for (let k = i+1; k < 12; k++){
+                if (enemyOrEmpty(source, board[k][j])){potential_moves.push([k,j]);}
+                else {break;}
+                if (enemyPiece(source, board[k][j])){break;}
+            }
+            //look left
+            for (let k = j-1; k > 0; k--){
+                if (enemyOrEmpty(source, board[i][k])){potential_moves.push([i,k]);}
+                else {break;}
+                if (enemyPiece(source, board[i][k])){break;}
+            }
+            //look right
+            for (let k = j+1; k < 12; k++){
+                if (enemyOrEmpty(source, board[i][k])){potential_moves.push([i,k]);}
+                else {break;}
+                if (enemyPiece(source, board[i][k])){break;}
+            }
+
+            return potential_moves;
+        }
+
+        //if bishop look on diagonals
+        if (Math.abs(source) == 3){
+            //look diagonal up to the left
+            for(let k = 1; k < 8; k++){
+                if (enemyOrEmpty(source, board[i-k][j-k])){potential_moves.push([i-k,j-k]);}
+                else {break;}
+                if (enemyPiece(source, board[i-k][j-k])){break;}
+            }
+            //look diagonal up to the right
+            for(let k = 1; k < 8; k++){
+                if (enemyOrEmpty(source, board[i-k][j+k])){potential_moves.push([i-k,j+k]);}
+                else {break;}
+                if (enemyPiece(source, board[i-k][j+k])){break;}
+            }
+            //look diagonal down to the left
+            for(let k = 1; k < 8; k++){
+                if (enemyOrEmpty(source, board[i+k][j-k])){potential_moves.push([i+k,j-k]);}
+                else {break;}
+                if (enemyPiece(source, board[i+k][j-k])){break;}
+            }
+            //look diagonal down to the right
+            for(let k = 1; k < 8; k++){
+                if (enemyOrEmpty(source, board[i+k][j+k])){potential_moves.push([i+k,j+k]);}
+                else {break;}
+                if (enemyPiece(source, board[i+k][j+k])){break;}
+            }
+
+            return potential_moves;
+        }
+
+        //if knight check in knight shaped pattern
+        if (Math.abs(source) == 2){
+            /*
+            need to check 8 squares in an L shape around the knight
+                j-1     j+1
+                i-2     i-2
+            j-2             j+2
+            i-1             i-1
+                    knight
+                    knight
+            j-2             j+2
+            i+1             i+1
+                j-1     j+1
+                i+2     i+2
+            
+            */
+    
+            if (enemyOrEmpty(source,board[i-2][j-1])){potential_moves.push([i-2,j-1]);}
+            if (enemyOrEmpty(source,board[i-2][j+1])){potential_moves.push([i-2,j+1]);}
+            if (enemyOrEmpty(source,board[i-1][j-2])){potential_moves.push([i-1,j-2]);}
+            if (enemyOrEmpty(source,board[i-1][j+2])){potential_moves.push([i-1,j+2]);}
+            if (enemyOrEmpty(source,board[i+1][j-2])){potential_moves.push([i+1,j-2]);}
+            if (enemyOrEmpty(source,board[i+1][j+2])){potential_moves.push([i+1,j+2]);}
+            if (enemyOrEmpty(source,board[i+2][j-1])){potential_moves.push([i+2,j-1]);}
+            if (enemyOrEmpty(source,board[i+2][j+1])){potential_moves.push([i+2,j+1]);}
+
+            return potential_moves;
+        }
+
+        //pawns slightly tricker, need to capture diagonally "forward" (only if enemy is there)
+        //need to only be able to move 1 forward
+        //need to be able to move 2 squares forward if they havent moved
+        //white pawn
+        if (source == 1){
+            //if square in front is empty
+            if (board[i-1][j] == 0){
+                potential_moves.push([i-1,j]);
+            }
+            //if pawn is on initial square
+            if (i == 8 && board[i-2][j] == 0){
+                potential_moves.push([i-2,j]);
+            }
+            //if pawn can capture diagonal left
+            if ((Math.abs(source) != board[i-1][j-1]) && (board[i-1][j-1] != 99) &&(board[i-1][j-1] != 0)){
+                potential_moves.push([i-1,j-1]);
+            }
+            //if pawn can capture diagonal right
+            if ((Math.abs(source) != board[i-1][j+1]) && board[i-1][j+1] != 99 && (board[i-1][j+1] != 0)){
+                potential_moves.push([i-1,j+1]);
+            }
+            return potential_moves
+        }
+        //black pawn
+        if (source == -1){
+            //if square in front is empty
+            if (board[i+1][j] == 0){
+                potential_moves.push([i+1,j]);
+            }
+            //if pawn is on initial square
+            if (i == 3 && board[i+2][j] == 0){
+                potential_moves.push([i+2,j]);
+            }
+            //if pawn can capture diagonal left
+            if ((Math.abs(source) != board[i+1][j-1]) && (board[i+1][j-1] != 99) && (board[i+1][j-1] != 0)){
+                potential_moves.push([i+1,j-1]);
+            }
+            //if pawn can capture diagonal right
+            if ((Math.abs(source) != board[i+1][j+1]) && (board[i+1][j+1] != 99) && (board[i+1][j+1] != 0)){
+                potential_moves.push([i+1,j+1]);
+            }
+            return potential_moves
+        }
+        
+    }
 
     
 
 }
+
+    //takes the value of a target
+    //returns true if the target is an enemy or empty square
+    //helpful for finding possible moves
+    function enemyOrEmpty(source_piece, target_square){
+        //if target not the same side
+        //or target is empty
+        //or target is 99 (out of bound)
+        if (target_square == 99){
+            return false;
+        }
+        if (target_square == 0){
+            return true;
+        }
+        if (Math.sign(source_piece) != Math.sign(target_square)){
+            return true;
+        }
+
+        return false;
+        
+    }
+    //identify enemy Piece
+    function enemyPiece(source_piece, target_square){
+        if (target_square == 99){
+            return false;
+        }
+        if ((Math.sign(source_piece) != Math.sign(target_square)) && (target_square != 0)){
+            return true;
+        }
+        return false;
+    }

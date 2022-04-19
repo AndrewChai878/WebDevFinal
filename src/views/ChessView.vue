@@ -111,6 +111,20 @@
         else if (this.active_square == null && square.firstChild){
           this.active_square = square;
           this.active_square.setAttribute("active","true");
+          let active_col = this.active_square.cellIndex;
+          let active_row = this.active_square.parentNode.rowIndex;
+          let target_squares = chess.getPotentialMoves(this.active_board,active_row,active_col);
+          //map to coords
+          target_squares = target_squares.map(x => [x[0]-2,x[1]-2])
+          console.log(target_squares);
+          //highlight target squares
+          for (let i = 0; i < target_squares.length; i++){
+            target_squares[i]
+            let target = document.getElementById('board-table').rows[target_squares[i][0]].cells[target_squares[i][1]];
+            if (target){
+              target.setAttribute("target","true");
+            }
+          }
           return;
         }
         //if there is an active square then this square is the target
@@ -133,6 +147,13 @@
           //done making the move so set the active square to false
           this.active_square.setAttribute("active","false");
           this.active_square = null;
+
+          //clear highlighted squares
+          let target_squares = document.querySelectorAll('[target="true"]');
+          for (let i = 0; i < target_squares.length; i++){
+            target_squares[i].setAttribute("target","false")
+          }
+
         }
       }
     }   
@@ -215,6 +236,10 @@
 
   .square[active = "true"]{
     background-color: rgba(255, 217, 26, 0.552);
+  }
+
+  .square[target = "true"]{
+    background-color: rgba(45, 255, 26, 0.552);
   }
 
 </style>
