@@ -1,5 +1,11 @@
 export default{
     generateBoard(){
+        // flush counters
+        numReds = 12
+        numBlacks = 12
+
+        // flush board
+        board = []
         for(let i = 0; i < 8; i++){
             board.push([0,0,0,0,0,0,0,0])
         }
@@ -48,44 +54,46 @@ export default{
     },
 
     // get the list of available moves for the selected piece i.e., [30,32,...,ij]
-    getMoves(position, piece){
+    getMoves(position, piece, followUp){
         let i = parseInt(position[0])
         let j = parseInt(position[1])
         let moves = ''
 
         switch(piece){
             case 1:
-                moves = this.moveRed(i,j,1)
+                moves = this.moveRed(i,j,followUp)
+                break;
+            case 2:
+                moves = this.moveKing(i,j,piece,followUp)
                 break;
             case 3:
-                moves = this.moveBlack(i,j,1)
+                moves = this.moveBlack(i,j,followUp)
                 break;
+            case 4:
+                moves = this.moveKing(i,j,piece,followUp)
+                break
         }
 
         return this.parseMoves(moves)
+    },
 
-        
+    getFollowUpMoves(position, piece){
+        return this.getMoves(position,piece,true)
     },
 
     // red pieces can only move downwards
-    // k is how many more moves the piece can make
-    moveRed(i,j,k){
-        // base case, no more moves
-        if(k == 0){
-            return ''
-        }
-        
+    moveRed(i,j,followUp){
         let s = ''
     
         // check left diagonal
         if(this.checkLegal(i+1,j-1)){
             // if the square has a black piece
             if(board[i+1][j-1] == 3 || board[i+1][j-1] == 4){
-                if(this.checkLegal(i+2,j-2)){
+                if(this.checkLegal(i+2,j-2) && board[i+2][j-2] == 0){
                     s+= (''+(i+2)+(j-2))
                 }
             // if the square is empty
-            }else if(board[i+1][j-1] == 0){
+            }else if(board[i+1][j-1] == 0 && !followUp){
                 s += (''+(i+1)+(j-1))
             }
         }
@@ -94,11 +102,11 @@ export default{
         if(this.checkLegal(i+1,j+1)){
             // if the square has a black piece
             if(board[i+1][j+1] == 3 || board[i+1][j+1] == 4){
-                if(this.checkLegal(i+2,j+2)){
+                if(this.checkLegal(i+2,j+2) && board[i+2][j+2] == 0){
                     s+= (''+(i+2)+(j+2))
                 }
             // if the square is empty
-            }else if(board[i+1][j+1] == 0){
+            }else if(board[i+1][j+1] == 0 && !followUp){
                 s += (''+(i+1)+(j+1))
             }
         }
@@ -106,23 +114,18 @@ export default{
     },
 
     // black pieces can only move upwards
-    moveBlack(i,j,k){
-        // base case, no more moves
-        if(k == 0){
-            return ''
-        }
-        
+    moveBlack(i,j,followUp){
         let s = ''
     
         // check left diagonal
         if(this.checkLegal(i-1,j-1)){
             // if the square has a red piece
             if(board[i-1][j-1] == 1 || board[i-1][j-1] == 2){
-                if(this.checkLegal(i-2,j-2)){
+                if(this.checkLegal(i-2,j-2) && board[i-2][j-2] == 0){
                     s+= (''+(i-2)+(j-2))
                 }
             // if the square is empty
-            }else if(board[i-1][j-1] == 0){
+            }else if(board[i-1][j-1] == 0 && !followUp){
                 s += (''+(i-1)+(j-1))
             }
         }
@@ -131,15 +134,97 @@ export default{
         if(this.checkLegal(i-1,j+1)){
             // if the square has a red piece
             if(board[i-1][j+1] == 1 || board[i-1][j+1] == 2){
-                if(this.checkLegal(i-2,j+2)){
+                if(this.checkLegal(i-2,j+2) && board[i-2][j+2] == 0){
                     s+= (''+(i-2)+(j+2))
                 }
             // if the square is empty
-            }else if(board[i-1][j+1] == 0){
+            }else if(board[i-1][j+1] == 0 && !followUp){
                 s += (''+(i-1)+(j+1))
             }
         }
         return s
+    },
+
+    moveKing(i,j,piece,followUp){
+        let s = ''
+        let enemy = 3
+        let enemyKing = 4
+        if(piece == 4){
+            enemy = 1
+            enemyKing = 2
+        }
+
+        // check left diagonal down
+        if(this.checkLegal(i+1,j-1)){
+            // if the square has an enemy piece
+            if(board[i+1][j-1] == enemy || board[i+1][j-1] == enemyKing){
+                if(this.checkLegal(i+2,j-2) && board[i+2][j-2] == 0){
+                    s+= (''+(i+2)+(j-2))
+                }
+            // if the square is empty
+            }else if(board[i+1][j-1] == 0 && !followUp){
+                s += (''+(i+1)+(j-1))
+            }
+        }
+
+        // check left diagonal up
+        if(this.checkLegal(i-1,j-1)){
+            // if the square has an enemy piece
+            if(board[i-1][j-1] == enemy || board[i-1][j-1] == enemyKing){
+                if(this.checkLegal(i-2,j-2) && board[i-2][j-2] == 0){
+                    s+= (''+(i-2)+(j-2))
+                }
+            // if the square is empty
+            }else if(board[i-1][j-1] == 0 && !followUp){
+                s += (''+(i-1)+(j-1))
+            }
+        }
+        
+        // check right diagonal down
+        if(this.checkLegal(i+1,j+1)){
+            // if the square has a friendly piece
+            if(board[i+1][j+1] == enemy || board[i+1][j+1] == enemyKing){
+                if(this.checkLegal(i+2,j+2) && board[i+2][j+2] == 0){
+                    s+= (''+(i+2)+(j+2))
+                }
+            // if the square is empty
+            }else if(board[i+1][j+1] == 0 && !followUp){
+                s += (''+(i+1)+(j+1))
+            }
+        }
+
+        // check right diagonal up
+        if(this.checkLegal(i-1,j+1)){
+            // if the square has a friendly piece
+            if(board[i-1][j+1] == enemy || board[i-1][j+1] == enemyKing){
+                if(this.checkLegal(i-2,j+2) && board[i-2][j+2] == 0){
+                    s+= (''+(i-2)+(j+2))
+                }
+            // if the square is empty
+            }else if(board[i-1][j+1] == 0 && !followUp){
+                s += (''+(i-1)+(j+1))
+            }
+        }
+
+        return s
+    },
+
+    setCount(piece){
+        if(piece == 1 || piece == 2){
+            numBlacks-=1
+        }else{
+            numReds-=1
+        }
+    },
+
+    checkWin(){
+        if(numReds == 0){
+            return 'black'
+        }
+        if(numBlacks == 0){
+            return 'red'
+        }
+        return ''
     },
 
     // returns a boolean, true if the move is legal else false
@@ -158,7 +243,7 @@ export default{
             return []
         }
         return moves
-    }
+    },
 
 }
 
@@ -168,3 +253,7 @@ let board = []
 // these variables are used with the updateCounter function
 let counter = 0;
 let alternate = false;
+
+// variables for storing pieces
+let numReds = 12;
+let numBlacks = 12;
