@@ -19,7 +19,9 @@ import checkers from '../js/checkers'
         name:"CheckersBoard",
         data(){
             return{
+                // the representation of the game board
                 board: null,
+                // turn number --> used to find current players turn by doing turn%2, 0 == p1, 1 == p2
                 turn: 1,
                 // the position of the most recently clicked piece
                 currentPiecePos:'',
@@ -79,6 +81,12 @@ import checkers from '../js/checkers'
                         let middleY = Math.round((newY+oldY)/2)
                         // delete eaten piece
                         this.board[middleX][middleY] = 0
+                        // update counts of pieces
+                        checkers.setCount(this.currentPieceNum)
+                        // check for winner
+                        let winner = checkers.checkWin()
+                        if(winner == 'red'){alert('Player 1 wins')}
+                        if(winner == 'black'){alert('Player 2 wins')}
                     }
                     
                     // level up if possible
@@ -102,10 +110,6 @@ import checkers from '../js/checkers'
 
 <style scoped>
 
-*{
-    background: grey;
-}
-
 table{
     margin-left: auto;
     margin-right: auto;
@@ -115,8 +119,8 @@ table{
 }
 
 td{
-    height: 10vh;
-    width: 10vh;
+    height: 10vmin;
+    width: 10vmin;
     text-align:left;
     vertical-align:bottom;
 }
@@ -126,13 +130,12 @@ td{
 }
 
 .type2{
-    background: '#204E70';
+    background-color: #708090;
 }
 
 img{
     width: 90%;
     height: auto;
-    background: whitesmoke;
     cursor: pointer;
 }
 

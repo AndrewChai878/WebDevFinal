@@ -1,5 +1,9 @@
 export default{
     generateBoard(){
+        // flush counters
+        numReds = 12
+        numBlacks = 12
+
         // flush board
         board = []
         for(let i = 0; i < 8; i++){
@@ -71,8 +75,6 @@ export default{
         }
 
         return this.parseMoves(moves)
-
-        
     },
 
     // red pieces can only move downwards
@@ -158,7 +160,6 @@ export default{
             enemy = 1
             enemyKing = 2
         }
-        console.log('current: ' + piece + ', enemy: ' + enemy + ', enemyKind: ' + enemyKing)
 
         // check left diagonal down
         if(this.checkLegal(i+1,j-1)){
@@ -215,6 +216,26 @@ export default{
         return s
     },
 
+    setCount(piece){
+        if(piece == 1 || piece == 2){
+            numBlacks-=1
+        }else{
+            numReds-=1
+        }
+        console.log('red: ' + numReds)
+        console.log('black: ' + numBlacks)
+    },
+
+    checkWin(){
+        if(numReds == 0){
+            return 'black'
+        }
+        if(numBlacks == 0){
+            return 'red'
+        }
+        return ''
+    },
+
     // returns a boolean, true if the move is legal else false
     // a legal move is a move that is within the bounds of the board
     checkLegal(i,j){
@@ -242,4 +263,6 @@ let board = []
 let counter = 0;
 let alternate = false;
 
-// create a dictionary that stores the set of moves the user can choose as the key, and as the value a list of piece to remove if that move is made
+// variables for storing pieces
+let numReds = 12;
+let numBlacks = 12;
