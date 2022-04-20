@@ -25,16 +25,19 @@ import 'firebase/compat/auth';
     login() {
       console.log("temp");
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(()=> {
+        document.getElementById("signin").innerHTML = `<router-link to="/#">${firebase.auth().currentUser.displayName}</router-link>`
         console.log("logged in u rat")
         alert("logged in u baka")}).catch(() => {
           console.log("u messed up login u dent")
           alert("you messed login up u dent")});
+          
     },
     register() {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(data => {
         data.user.updateProfile({
-          displayName: "Ur not Wahbi"
-        })
+          displayName: "Probably Not Wabz"
+        });
+        data.user.sendEmailVerification();
       }).catch(() => {
           console.log("u messed register up u dent")
           alert("you messed register up u dent")});
