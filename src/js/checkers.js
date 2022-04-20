@@ -1,5 +1,7 @@
 export default{
     generateBoard(){
+        // flush board
+        board = []
         for(let i = 0; i < 8; i++){
             board.push([0,0,0,0,0,0,0,0])
         }
@@ -158,7 +160,7 @@ export default{
             return []
         }
         return moves
-    }
+    },
 
 }
 
