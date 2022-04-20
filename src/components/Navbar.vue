@@ -1,9 +1,9 @@
 <template>
     <nav>
         <div class="menu-item"><router-link to="/">Home</router-link></div>
-        <div class="menu-item"><router-link to="/sign-in">Sign-in</router-link></div>
         <div class="menu-item"><router-link to="/settings">Settings</router-link></div>
         <NavDropdown /> 
+        <div class="signin" id="signin"><router-link to="/sign-in">Sign-in</router-link></div>
     </nav>
     <router-view/>
 </template>
