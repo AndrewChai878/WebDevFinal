@@ -837,6 +837,18 @@ export default {
         }
 
 
+    },
+
+    //convert column index to file
+    colToFile(col){
+        let files = ["a","b","c","d","e","f","g","h"];
+        return files[col-2];
+    },
+
+    //convert piece number to character
+    pToChar(p){
+        let chars = ["","N","B","R","Q","K"];
+        return chars[Math.abs(p)-1];
     }
 
 }
