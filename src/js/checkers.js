@@ -81,7 +81,7 @@ export default{
         if(this.checkLegal(i+1,j-1)){
             // if the square has a black piece
             if(board[i+1][j-1] == 3 || board[i+1][j-1] == 4){
-                if(this.checkLegal(i+2,j-2)){
+                if(this.checkLegal(i+2,j-2) && board[i+2][j-2] == 0){
                     s+= (''+(i+2)+(j-2))
                 }
             // if the square is empty
@@ -94,7 +94,7 @@ export default{
         if(this.checkLegal(i+1,j+1)){
             // if the square has a black piece
             if(board[i+1][j+1] == 3 || board[i+1][j+1] == 4){
-                if(this.checkLegal(i+2,j+2)){
+                if(this.checkLegal(i+2,j+2) && board[i+2][j+2] == 0){
                     s+= (''+(i+2)+(j+2))
                 }
             // if the square is empty
@@ -118,7 +118,7 @@ export default{
         if(this.checkLegal(i-1,j-1)){
             // if the square has a red piece
             if(board[i-1][j-1] == 1 || board[i-1][j-1] == 2){
-                if(this.checkLegal(i-2,j-2)){
+                if(this.checkLegal(i-2,j-2) && board[i-2][j-2] == 0){
                     s+= (''+(i-2)+(j-2))
                 }
             // if the square is empty
@@ -131,7 +131,7 @@ export default{
         if(this.checkLegal(i-1,j+1)){
             // if the square has a red piece
             if(board[i-1][j+1] == 1 || board[i-1][j+1] == 2){
-                if(this.checkLegal(i-2,j+2)){
+                if(this.checkLegal(i-2,j+2) && board[i-2][j+2] == 0){
                     s+= (''+(i-2)+(j+2))
                 }
             // if the square is empty
@@ -168,3 +168,5 @@ let board = []
 // these variables are used with the updateCounter function
 let counter = 0;
 let alternate = false;
+
+// create a dictionary that stores the set of moves the user can choose as the key, and as the value a list of piece to remove if that move is made

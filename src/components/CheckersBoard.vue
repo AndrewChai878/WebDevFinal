@@ -24,17 +24,23 @@ import checkers from '../js/checkers'
         },
         computed: {},
         methods:{
+            // assigns a class which determines if the square is black or white
             assignClass: function(){
                 let n = checkers.updateCounter()
                 return n%2 == 0 ? 'type1':'type2'
             },
             change: function(event, piece){
                 //event.target.parentElement returns the parent element information
+                this.removeHighlight()
                 let position = event.target.parentElement.id
                 let moves = checkers.getMoves(position,piece)
-                console.log(moves)
-                
-            }
+                moves.forEach(pos=> document.getElementById(pos).classList.add('highlight'))
+
+            },
+            // removes the highlight class from the squares that have it
+            removeHighlight: function(){
+                (document.querySelectorAll('.highlight')).forEach(square=>square.classList.remove('highlight'))
+            },
         },
         mounted(){
             this.board = checkers.generateBoard();
@@ -81,6 +87,10 @@ img{
     height: auto;
     background: whitesmoke;
     cursor: pointer;
+}
+
+.highlight{
+    background: blue;
 }
 
 </style>
