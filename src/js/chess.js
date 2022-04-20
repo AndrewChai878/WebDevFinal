@@ -553,11 +553,11 @@ export default {
                 potential_moves.push([i-2,j]);
             }
             //if pawn can capture diagonal left
-            if ((Math.abs(source) != board[i-1][j-1]) && (board[i-1][j-1] != 99) &&(board[i-1][j-1] != 0)){
+            if ((Math.sign(source) != Math.sign(board[i-1][j-1])) && (board[i-1][j-1] != 99) &&(board[i-1][j-1] != 0)){
                 potential_moves.push([i-1,j-1]);
             }
             //if pawn can capture diagonal right
-            if ((Math.abs(source) != board[i-1][j+1]) && board[i-1][j+1] != 99 && (board[i-1][j+1] != 0)){
+            if ((Math.sign(source) != Math.sign(board[i-1][j+1])) && board[i-1][j+1] != 99 && (board[i-1][j+1] != 0)){
                 potential_moves.push([i-1,j+1]);
             }
             return potential_moves;
@@ -573,11 +573,11 @@ export default {
                 potential_moves.push([i+2,j]);
             }
             //if pawn can capture diagonal left
-            if ((Math.abs(source) != board[i+1][j-1]) && (board[i+1][j-1] != 99) && (board[i+1][j-1] != 0)){
+            if ((Math.sign(source) != Math.sign(board[i+1][j-1])) && (board[i+1][j-1] != 99) && (board[i+1][j-1] != 0)){
                 potential_moves.push([i+1,j-1]);
             }
             //if pawn can capture diagonal right
-            if ((Math.abs(source) != board[i+1][j+1]) && (board[i+1][j+1] != 99) && (board[i+1][j+1] != 0)){
+            if ((Math.sign(source) != Math.sign(board[i+1][j+1])) && (board[i+1][j+1] != 99) && (board[i+1][j+1] != 0)){
                 potential_moves.push([i+1,j+1]);
             }
             return potential_moves;

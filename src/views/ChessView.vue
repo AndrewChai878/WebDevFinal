@@ -265,7 +265,17 @@
               this.active_board[2][6] = 0;
               this.active_board[2][4] = -6;
               this.active_board[2][5] = -4;
-            } else {
+            }
+            //if promoting a pawn
+            else if (this.active_board[active_row+2][active_col+2] == 1 && target_row+2 == 2){
+              this.active_board[target_row+2][target_col+2] = 5;
+              this.active_board[active_row+2][active_col+2] = 0;
+            } 
+            else if (this.active_board[active_row+2][active_col+2] == -1 && target_row+2 == 9){
+              this.active_board[target_row+2][target_col+2] = -5;
+              this.active_board[active_row+2][active_col+2] = 0;
+            }
+            else {
               //move the active square's value to the target's location
               this.active_board[target_row+2][target_col+2] = this.active_board[active_row+2][active_col+2];
               //piece has moved out of square fill with 0
