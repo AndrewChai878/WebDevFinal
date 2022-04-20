@@ -3,11 +3,11 @@
     <div class = "gameplay-info">
             <p>
               Game Information <br> <br>
-              Turn: {{playerTurn}} <br> <br>
-              In Check?: {{inCheck}} <br> <br>
-              Gameover?: <br>
-              {{gameOver}} <br>
-
+            </p>
+            <p class = "game-turn">
+              {{playerTurn}} <br> <br>
+              {{inCheck}}  <br> <br>
+              {{gameOver}} <br> <br>
             </p>
     </div>
     <div class = "board">
@@ -61,24 +61,24 @@
       inCheck(){
         if (this.active_board != null){
           if (chess.kingInCheck(this.active_board, 1)){
-            return "White"
+            return "In Check: White"
           }
           else if (chess.kingInCheck(this.active_board, -1)){
-            return "Black"
+            return "In Check: Black"
           }
           else {
-            return "No"
+            return null
           }
         } else {
-          return "No";
+          return null
         }
       },
 
       playerTurn(){
         if (this.side == 1){
-          return "White";
+          return "Turn: White"
         } else {
-          return "Black";
+          return "Turn: Black"
         }
       },
 
@@ -97,11 +97,11 @@
               return "Draw! Black Is Stalemated"
             }
             else {
-              return "No"
+              return null
             }
           }
         else {
-          return "No"
+          return null
         } 
       }
 
@@ -390,16 +390,22 @@
 
   .gameplay-info{
     grid-column: 1;
-    font-size: xx-large;
+    font-size: x-large;
     font-weight: 600;
     text-align: center;
     background-color: antiquewhite;
     border-style: solid;
     border-width: 3px;
     border-color: black;
-    margin-left: 5vw;
+    overflow: auto;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
     margin-top: 5vw;
     margin-bottom: 5vw;
+  }
+
+  .game-turn {
+    padding: 25% 0% 0%;
   }
 
   .flip:hover{
@@ -413,7 +419,7 @@
     background-image: url(../assets/chess/board.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-color: red;
+    background-color: #331a00;
     height: 80vh;
     width: 80vh;
     margin: auto;
@@ -473,7 +479,8 @@
     border-style: solid;
     border-width: 3px;
     border-color: black;
-    margin-right: 5vw;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
     margin-top: 5vw;
     margin-bottom: 5vw;
     overflow: auto;
