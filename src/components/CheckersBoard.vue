@@ -37,7 +37,7 @@ import checkers from '../js/checkers'
             getMoves: function(event, piece){
                 //event.target.parentElement returns the parent element information
                 // if the piece clicked matches the player whose turn it is
-                if(this.turn%2 + 1 == piece || this.turn%2 + 2 == piece){
+                if((this.turn%2 == 0 && (piece == 1 || piece==2)) || (this.turn%2 == 1 && (piece == 3 || piece==4))){
                     // unhighlight any highlighted squares
                     this.removeHighlight()
                     let position = event.target.parentElement.id
@@ -52,7 +52,8 @@ import checkers from '../js/checkers'
                 (document.querySelectorAll('.highlight')).forEach(square=>square.classList.remove('highlight'))
             },
 
-            // move piece to the clicked square
+            // moves piece to the clicked square and eats any pieces in the way,
+            // also levels the piece up if it reaches the end
             movePiece: function(event){
                 // get the id of the square
                 let id = event.target.id
@@ -62,10 +63,31 @@ import checkers from '../js/checkers'
                     let newY = parseInt(id[1])
                     let oldX = parseInt(this.currentPiecePos[0])
                     let oldY = parseInt(this.currentPiecePos[1])
+                    // clear old position
                     this.board[oldX][oldY] = 0
+                    // move piecec to new positiom
                     this.board[newX][newY] = this.currentPieceNum
+                    // next players turn
                     this.turn +=1
+                    // reset square highlights
                     this.removeHighlight()
+                    
+                    // eat piece
+                    if(Math.abs(newX-oldX) > 1 && Math.abs(newY-oldY) > 1){
+                        // get coordinates of eaten piece
+                        let middleX = Math.round((newX+oldX)/2)
+                        let middleY = Math.round((newY+oldY)/2)
+                        // delete eaten piece
+                        this.board[middleX][middleY] = 0
+                    }
+                    
+                    // level up if possible
+                    if(newX == 0 || newX == 7){
+                        if(this.currentPieceNum != 2 && this.currentPieceNum != 4){
+                            this.board[newX][newY] += 1
+                        }
+                    }
+                
                 }
             },
         },

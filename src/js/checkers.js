@@ -59,9 +59,15 @@ export default{
             case 1:
                 moves = this.moveRed(i,j,1)
                 break;
+            case 2:
+                moves = this.moveKing(i,j,piece)
+                break;
             case 3:
                 moves = this.moveBlack(i,j,1)
                 break;
+            case 4:
+                moves = this.moveKing(i,j,piece)
+                break
         }
 
         return this.parseMoves(moves)
@@ -141,6 +147,71 @@ export default{
                 s += (''+(i-1)+(j+1))
             }
         }
+        return s
+    },
+
+    moveKing(i,j,piece){
+        let s = ''
+        let enemy = 3
+        let enemyKing = 4
+        if(piece == 4){
+            enemy = 1
+            enemyKing = 2
+        }
+        console.log('current: ' + piece + ', enemy: ' + enemy + ', enemyKind: ' + enemyKing)
+
+        // check left diagonal down
+        if(this.checkLegal(i+1,j-1)){
+            // if the square has an enemy piece
+            if(board[i+1][j-1] == enemy || board[i+1][j-1] == enemyKing){
+                if(this.checkLegal(i+2,j-2) && board[i+2][j-2] == 0){
+                    s+= (''+(i+2)+(j-2))
+                }
+            // if the square is empty
+            }else if(board[i+1][j-1] == 0){
+                s += (''+(i+1)+(j-1))
+            }
+        }
+
+        // check left diagonal up
+        if(this.checkLegal(i-1,j-1)){
+            // if the square has an enemy piece
+            if(board[i-1][j-1] == enemy || board[i-1][j-1] == enemyKing){
+                if(this.checkLegal(i-2,j-2) && board[i-2][j-2] == 0){
+                    s+= (''+(i-2)+(j-2))
+                }
+            // if the square is empty
+            }else if(board[i-1][j-1] == 0){
+                s += (''+(i-1)+(j-1))
+            }
+        }
+        
+        // check right diagonal down
+        if(this.checkLegal(i+1,j+1)){
+            // if the square has a friendly piece
+            if(board[i+1][j+1] == enemy || board[i+1][j+1] == enemyKing){
+                if(this.checkLegal(i+2,j+2) && board[i+2][j+2] == 0){
+                    s+= (''+(i+2)+(j+2))
+                }
+            // if the square is empty
+            }else if(board[i+1][j+1] == 0){
+                s += (''+(i+1)+(j+1))
+            }
+        }
+
+        // check right diagonal up
+        if(this.checkLegal(i-1,j+1)){
+            // if the square has a friendly piece
+            if(board[i-1][j+1] == enemy || board[i-1][j+1] == enemyKing){
+                if(this.checkLegal(i-2,j+2) && board[i-2][j+2] == 0){
+                    s+= (''+(i-2)+(j+2))
+                }
+            // if the square is empty
+            }else if(board[i-1][j+1] == 0){
+                s += (''+(i-1)+(j+1))
+            }
+        }
+
         return s
     },
 
