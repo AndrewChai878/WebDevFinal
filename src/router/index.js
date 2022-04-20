@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import SigninView from '../views/SigninView.vue'
 import SettingsView from '../views/SettingsView.vue'
 import ChessView from '../views/ChessView.vue'
+import TicTacToeView from '../views/TicTacToeView'
 import CheckersView from '../views/CheckersView.vue'
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
     path: '/chess',
     name: 'chess',
     component: ChessView
+  },
+  {
+    path: '/tictactoe',
+    name: 'tictactoe',
+    component: TicTacToeView
   },
   {
     path: '/checkers',
