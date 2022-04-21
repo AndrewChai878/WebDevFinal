@@ -3,12 +3,18 @@
     <div class = "gameplay-info">
             <p>
               Game Information <br> <br>
-              Turn: {{playerTurn}} <br> <br>
-              In Check?: {{inCheck}} <br> <br>
-              Gameover?: <br>
-              {{gameOver}} <br>
-
             </p>
+            <div class = "game-turn">
+              <p>
+                {{gameOver}} <br> <br>
+              </p>
+              <p>
+                {{playerTurn}} <br> <br>
+              </p>
+              <p>
+                {{inCheck}}  <br> <br>
+              </p>
+            </div>
     </div>
     <div class = "board">
         <div v-if="active_board">
@@ -61,24 +67,24 @@
       inCheck(){
         if (this.active_board != null){
           if (chess.kingInCheck(this.active_board, 1)){
-            return "White"
+            return "In Check: White"
           }
           else if (chess.kingInCheck(this.active_board, -1)){
-            return "Black"
+            return "In Check: Black"
           }
           else {
-            return "No"
+            return null
           }
         } else {
-          return "No";
+          return null
         }
       },
 
       playerTurn(){
         if (this.side == 1){
-          return "White";
+          return "Turn: White"
         } else {
-          return "Black";
+          return "Turn: Black"
         }
       },
 
@@ -97,11 +103,11 @@
               return "Draw! Black Is Stalemated"
             }
             else {
-              return "No"
+              return null
             }
           }
         else {
-          return "No"
+          return null
         } 
       }
 
@@ -271,14 +277,14 @@
               this.active_board[9][6] = 0;
               this.active_board[9][8] = 6;
               this.active_board[9][7] = 4;
-              this.move_history = this.move_history + "\n" + this.move_counter + ". O-O ";
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t O-O";
             }
             else if (this.active_board[active_row+2][active_col+2] == 6 && active_col+2 == 6 && target_col+2 == 4){
               this.active_board[9][2] = 0;
               this.active_board[9][6] = 0;
               this.active_board[9][4] = 6;
               this.active_board[9][5] = 4;
-              this.move_history = this.move_history + "\n" + this.move_counter + ". O-O-O ";
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t O-O-O";
             }
             else if (this.active_board[active_row+2][active_col+2] == -6 && active_col+2 == 6 && target_col+2 == 8){
               this.active_board[2][9] = 0;
@@ -296,7 +302,7 @@
             }
             //if promoting a pawn
             else if (this.active_board[active_row+2][active_col+2] == 1 && target_row+2 == 2){
-              this.move_history = this.move_history + "\n" + this.move_counter + ". " +  chess.colToFile(active_col+2);
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t" +  chess.colToFile(active_col+2);
               if (this.active_board[target_row+2][target_col+2] != 0){
                 this.move_history = this.move_history + "x";
               }
@@ -317,7 +323,7 @@
             else {
               //if on white side add newline and turn to move history
               if (this.side == 1){
-                this.move_history = this.move_history + "\n" + this.move_counter + ".";
+                this.move_history = this.move_history + "\n" + this.move_counter + ".\t";
               }
               //add the piece that is moving
               this.move_history = this.move_history + " " + chess.pToChar(this.active_board[active_row+2][active_col+2]);
@@ -327,7 +333,7 @@
               if (this.active_board[target_row+2][target_col+2] != 0){
                 //if piece doing the capturing is a pawn
                 if (Math.abs(this.active_board[active_row+2][active_col+2]) == 1){
-                  this.move_history = this.move_history + " " + chess.colToFile(active_col+2);
+                  this.move_history = this.move_history + chess.colToFile(active_col+2);
                 }
                 this.move_history = this.move_history + "x";
               }
@@ -390,16 +396,22 @@
 
   .gameplay-info{
     grid-column: 1;
-    font-size: xx-large;
+    font-size: x-large;
     font-weight: 600;
     text-align: center;
     background-color: antiquewhite;
     border-style: solid;
     border-width: 3px;
     border-color: black;
-    margin-left: 5vw;
+    overflow: auto;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
     margin-top: 5vw;
     margin-bottom: 5vw;
+  }
+
+  .game-turn p{
+    padding: 25% 0% 0%;
   }
 
   .flip:hover{
@@ -413,7 +425,7 @@
     background-image: url(../assets/chess/board.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-color: red;
+    background-color: #331a00;
     height: 80vh;
     width: 80vh;
     margin: auto;
@@ -468,16 +480,20 @@
     grid-column: 3;
     font-size: large;
     font-weight: 600;
-    text-align: center;
+    text-align: left;
     background-color: antiquewhite;
     border-style: solid;
     border-width: 3px;
     border-color: black;
-    margin-right: 5vw;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
     margin-top: 5vw;
     margin-bottom: 5vw;
     overflow: auto;
     white-space: pre;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
 </style>
