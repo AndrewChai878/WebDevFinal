@@ -277,14 +277,14 @@
               this.active_board[9][6] = 0;
               this.active_board[9][8] = 6;
               this.active_board[9][7] = 4;
-              this.move_history = this.move_history + "\n" + this.move_counter + ".\t O-O ";
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t O-O";
             }
             else if (this.active_board[active_row+2][active_col+2] == 6 && active_col+2 == 6 && target_col+2 == 4){
               this.active_board[9][2] = 0;
               this.active_board[9][6] = 0;
               this.active_board[9][4] = 6;
               this.active_board[9][5] = 4;
-              this.move_history = this.move_history + "\n" + this.move_counter + ".\t O-O-O ";
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t O-O-O";
             }
             else if (this.active_board[active_row+2][active_col+2] == -6 && active_col+2 == 6 && target_col+2 == 8){
               this.active_board[2][9] = 0;
@@ -302,7 +302,7 @@
             }
             //if promoting a pawn
             else if (this.active_board[active_row+2][active_col+2] == 1 && target_row+2 == 2){
-              this.move_history = this.move_history + "\n" + this.move_counter + ".\t " +  chess.colToFile(active_col+2);
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t" +  chess.colToFile(active_col+2);
               if (this.active_board[target_row+2][target_col+2] != 0){
                 this.move_history = this.move_history + "x";
               }
@@ -333,7 +333,7 @@
               if (this.active_board[target_row+2][target_col+2] != 0){
                 //if piece doing the capturing is a pawn
                 if (Math.abs(this.active_board[active_row+2][active_col+2]) == 1){
-                  this.move_history = this.move_history + " " + chess.colToFile(active_col+2);
+                  this.move_history = this.move_history + chess.colToFile(active_col+2);
                 }
                 this.move_history = this.move_history + "x";
               }
