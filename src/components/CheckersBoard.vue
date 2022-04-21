@@ -98,7 +98,10 @@ import checkers from '../js/checkers'
                         let middleX = Math.round((newX+oldX)/2)
                         let middleY = Math.round((newY+oldY)/2)
                         
-                        // delete eaten piece
+                        // delete eaten piece from the board and update the parent component
+                        let eatenPiece = this.board[middleX][middleY]
+                        if(eatenPiece == 2 || eatenPiece == 4){eatenPiece-=1}
+                        this.$emit('eat', eatenPiece)
                         this.board[middleX][middleY] = 0
                         
                         // update counts of pieces
