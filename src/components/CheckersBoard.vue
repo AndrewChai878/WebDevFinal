@@ -111,6 +111,7 @@ import checkers from '../js/checkers'
                     }else{                
                         // next players turn
                         this.turn +=1
+                        this.$emit('turn', this.turn)
                         // no follow up move
                         this.followup = false
                     }
@@ -126,6 +127,7 @@ import checkers from '../js/checkers'
                 }else{
                     // next players turn
                     this.turn +=1
+                    this.$emit('turn', this.turn)
                     this.followup = false
                 }
             },
@@ -136,7 +138,7 @@ import checkers from '../js/checkers'
             this.board = checkers.generateBoard();
             // randomly decides who is going first
             this.turn = Math.floor(Math.random() * 2)==0? this.turn=0: this.turn =1
-            console.log('current turn: '+this.turn)
+            this.$emit('turn', this.turn)
         }
     }
 </script>
@@ -152,8 +154,8 @@ table{
 }
 
 td{
-    height: 10vmin;
-    width: 10vmin;
+    height: 9vmin;
+    width: 9vmin;
     text-align:left;
     vertical-align:bottom;
 }
