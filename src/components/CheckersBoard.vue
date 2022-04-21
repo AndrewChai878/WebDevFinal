@@ -53,12 +53,15 @@ import checkers from '../js/checkers'
                     this.currentPieceNum = piece
                     let moves = checkers.getMoves(position,piece,false)
                     moves.forEach(pos=> document.getElementById(pos).classList.add('highlight'))
+                    document.getElementById(position).classList.add('pieceHighlight')
                 }
             },
             
             // removes the highlight class from the squares that have it
             removeHighlight: function(){
-                (document.querySelectorAll('.highlight')).forEach(square=>square.classList.remove('highlight'))
+                (document.querySelectorAll('.highlight')).forEach(square=>square.classList.remove('highlight'));
+                let piece = (document.querySelector('.pieceHighlight'))
+                if(piece != null){piece.classList.remove('pieceHighlight');}
             },
 
             // moves piece to the clicked square and eats any pieces in the way,
@@ -123,6 +126,7 @@ import checkers from '../js/checkers'
                 moves.forEach(pos=> document.getElementById(pos).classList.add('highlight'))
                 // there are follow up moves available
                 if(moves.length != 0){
+                    document.getElementById(position).classList.add('pieceHighlight')
                     this.followup = true
                 }else{
                     // next players turn
@@ -175,7 +179,13 @@ img{
 }
 
 .highlight{
-    background: blue;
+    background: rgb(174, 226, 176);
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.pieceHighlight{
+    background: rgb(174, 226, 176);
 }
 
 </style>
