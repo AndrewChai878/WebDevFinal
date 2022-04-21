@@ -3,7 +3,7 @@
         <div class="menu-item"><router-link to="/">Home</router-link></div>
         <div class="menu-item"><router-link to="/settings">Settings</router-link></div>
         <NavDropdown /> 
-        <div class="menu-item" id="signin" v-if="store.state.isLoggedIn"><UserDropdown /></div>
+        <UserDropdown class="menu-item" id="signin" v-if="store.state.isLoggedIn" />
         <div class="signin" id="signin" v-else><router-link to="/sign-in">Sign-in</router-link></div>
     </nav>
     <router-view/>

@@ -52,7 +52,6 @@ let storageRef = firebase
     }
 
     .dropbtn{
-        display: flex;
         font-weight: bold;
         font-size: inherit;
         border: none;
