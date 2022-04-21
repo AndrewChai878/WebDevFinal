@@ -4,11 +4,17 @@
             <p>
               Game Information <br> <br>
             </p>
-            <p class = "game-turn">
-              {{playerTurn}} <br> <br>
-              {{inCheck}}  <br> <br>
-              {{gameOver}} <br> <br>
-            </p>
+            <div class = "game-turn">
+              <p>
+                {{gameOver}} <br> <br>
+              </p>
+              <p>
+                {{playerTurn}} <br> <br>
+              </p>
+              <p>
+                {{inCheck}}  <br> <br>
+              </p>
+            </div>
     </div>
     <div class = "board">
         <div v-if="active_board">
@@ -271,14 +277,14 @@
               this.active_board[9][6] = 0;
               this.active_board[9][8] = 6;
               this.active_board[9][7] = 4;
-              this.move_history = this.move_history + "\n" + this.move_counter + ". O-O ";
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t O-O ";
             }
             else if (this.active_board[active_row+2][active_col+2] == 6 && active_col+2 == 6 && target_col+2 == 4){
               this.active_board[9][2] = 0;
               this.active_board[9][6] = 0;
               this.active_board[9][4] = 6;
               this.active_board[9][5] = 4;
-              this.move_history = this.move_history + "\n" + this.move_counter + ". O-O-O ";
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t O-O-O ";
             }
             else if (this.active_board[active_row+2][active_col+2] == -6 && active_col+2 == 6 && target_col+2 == 8){
               this.active_board[2][9] = 0;
@@ -296,7 +302,7 @@
             }
             //if promoting a pawn
             else if (this.active_board[active_row+2][active_col+2] == 1 && target_row+2 == 2){
-              this.move_history = this.move_history + "\n" + this.move_counter + ". " +  chess.colToFile(active_col+2);
+              this.move_history = this.move_history + "\n" + this.move_counter + ".\t " +  chess.colToFile(active_col+2);
               if (this.active_board[target_row+2][target_col+2] != 0){
                 this.move_history = this.move_history + "x";
               }
@@ -317,7 +323,7 @@
             else {
               //if on white side add newline and turn to move history
               if (this.side == 1){
-                this.move_history = this.move_history + "\n" + this.move_counter + ".";
+                this.move_history = this.move_history + "\n" + this.move_counter + ".\t";
               }
               //add the piece that is moving
               this.move_history = this.move_history + " " + chess.pToChar(this.active_board[active_row+2][active_col+2]);
@@ -404,7 +410,7 @@
     margin-bottom: 5vw;
   }
 
-  .game-turn {
+  .game-turn p{
     padding: 25% 0% 0%;
   }
 
@@ -474,7 +480,7 @@
     grid-column: 3;
     font-size: large;
     font-weight: 600;
-    text-align: center;
+    text-align: left;
     background-color: antiquewhite;
     border-style: solid;
     border-width: 3px;
@@ -485,6 +491,9 @@
     margin-bottom: 5vw;
     overflow: auto;
     white-space: pre;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
 </style>

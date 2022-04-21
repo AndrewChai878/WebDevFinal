@@ -1,6 +1,7 @@
 <template>
     <div class="move-history">
-        <p>Moves: {{moves}}</p>
+        <p>Moves:</p>
+        <p>{{moves}}</p>
     </div>
 </template>
 
