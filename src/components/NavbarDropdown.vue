@@ -3,7 +3,7 @@
         <button class="dropbtn">Games ▾</button>
         <div class="dropmenu" id="dropmenu">
             <div><router-link to="/chess">Chess</router-link></div>
-            <div><router-link to="/">Game2</router-link></div>
+            <div><router-link to="/">Tic Tac Toe</router-link></div>
             <div><router-link to="/checkers">Checkers</router-link></div>
         </div>
     </div>
