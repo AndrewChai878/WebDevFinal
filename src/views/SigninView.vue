@@ -16,7 +16,8 @@
 <script>
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-
+import 'firebase/storage';
+import 'firebase/compat/storage';
   export default {
     name: 'SigninView',
     data() {
@@ -28,7 +29,6 @@ import 'firebase/compat/auth';
     login() {
       console.log("temp");
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(()=> {
-        document.getElementById("signin").innerHTML = `<router-link to="/#">${firebase.auth().currentUser.displayName}</router-link>`
         console.log("logged in u rat")
         alert("logged in u baka")}).catch(() => {
           console.log("u messed up login u dent")
@@ -40,6 +40,20 @@ import 'firebase/compat/auth';
         data.user.updateProfile({
           displayName: "Probably Not Wabz"
         });
+            var tempUser = firebase.auth().currentUser;
+
+    let storageRef = firebase.storage().ref(tempUser.uid + '/profilePicture/avatar.png', );
+
+ 
+    fetch('default-avatar.png')
+    .then(function(response) {
+      
+      return response.blob()
+    })
+    .then(function(blob) {
+      // here the image is a blob
+      storageRef.put(blob)
+    });
         data.user.sendEmailVerification();
       }).catch(() => {
           console.log("u messed register up u dent")
@@ -48,6 +62,7 @@ import 'firebase/compat/auth';
   }
   }
 
+  
 </script>
 
 <style scoped lang="scss">

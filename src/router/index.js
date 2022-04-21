@@ -5,6 +5,7 @@ import SettingsView from '../views/SettingsView.vue'
 import ChessView from '../views/ChessView.vue'
 import TicTacToeView from '../views/TicTacToeView'
 import CheckersView from '../views/CheckersView.vue'
+import UserSettings from '../views/UserSettingsView.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/checkers',
     name: 'checkers',
     component: CheckersView
+  },
+  {
+    path: '/usersettings',
+    name: 'usersettings',
+    component: UserSettings
   },
 ]
 
