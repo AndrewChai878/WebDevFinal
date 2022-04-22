@@ -1,6 +1,5 @@
 <template>
     <div>
-        <TicTacToeTools />
         <TicTacToeBoard />
     </div>
 </template>
@@ -10,12 +9,10 @@
 
 <script>
     import TicTacToeBoard from '../components/TicTacToeBoard.vue'
-    import TicTacToeTools from '../components/TicTacToeTools.vue'
     export default {
         name: 'TicTacToeView',
         components:{
-            TicTacToeBoard,
-            TicTacToeTools
+            TicTacToeBoard
         }
     }
 </script>
