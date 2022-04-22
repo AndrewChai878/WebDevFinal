@@ -21,7 +21,7 @@
         <div class="pieceContainer"><img v-for="index in (12 - this.numBlacks)" src="../assets/checkers/black.png" :key="index" /></div>
       </div> 
     </div>
-</div>
+  </div>
  
 </template>
 
