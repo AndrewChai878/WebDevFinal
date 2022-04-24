@@ -40,6 +40,7 @@ export default {
                 }else{
                     this.turn = 0;
                 }
+                this.$emit('turn', this.turn);
             }else if(this.winner){
                 console.log("Start a new game");
             }
@@ -52,6 +53,7 @@ export default {
             this.board = ttt.newGame();
             this.winner = false;
             this.turn = 0;
+            this.$emit('turn', this.turn);
             //remove winner class from cells
             for(let i = 0; i < 3; i++){
                 for(let j = 0; j < 3; j++){
@@ -140,14 +142,13 @@ export default {
 
 
 <style scoped lang="scss">
-.tttBoard table{
+table{
     background-image: url(../assets/tictactoe/board.png);
     background-size: 100% 100%;
     height: 80vh;
     width: 80vh;
-    margin: auto;
-    table-layout: fixed;
     border-collapse: collapse;
+    margin: auto;
 }
 
 td:hover{
