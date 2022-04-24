@@ -1,6 +1,13 @@
 <template>
-    <div>
-        <TicTacToeBoard />
+    <div class="container">
+        <div class="info">
+            <h2>Turn:</h2>
+            <img v-if="turn == 0" src="../assets/tictactoe/x.png" alt="X">
+            <img v-else-if="turn == 1" src="../assets/tictactoe/o.png" alt="O">
+        </div>
+        <div class="board">
+            <TicTacToeBoard v-on:turn="turn=($event)" />
+        </div>
     </div>
 </template>
 
@@ -13,17 +20,29 @@
         name: 'TicTacToeView',
         components:{
             TicTacToeBoard
+        },
+        data(){
+            return{
+                turn: 0
+            }
         }
     }
 </script>
 
 
-<style scoped lang="scss">
-.tttBoard table{
-    background-image: url(../assets/tictactoe/board.png);
-    background-size: 100% 100%;
-    height: 80vh;
-    width: 80vh;
-    margin: auto;
+<style scoped>
+.container{
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
 }
+
+.board{
+    flex: 50%;
+}
+
+img{
+    width: 120px;
+}
+
 </style>
