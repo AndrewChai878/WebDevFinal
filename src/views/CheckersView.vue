@@ -100,12 +100,12 @@ div{
 .pieceContainer{
   display:flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   align-items:center;
 }
 
 .pieces{
-  justify-content: start;
+  justify-content: flex-start;
   padding: 0.5vmax;
   display:flex;
   align-items:center;
