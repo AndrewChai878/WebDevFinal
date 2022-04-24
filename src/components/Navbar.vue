@@ -1,16 +1,41 @@
 <template>
-  <nav class="navbar">
-    <div class="menu-item name"><router-link to="/">Home</router-link></div>
-    <div class="menu-item"><router-link to="/settings">Settings</router-link></div>
-    <NavDropdown class="menu-item" />
-    <UserDropdown class="menu-item right-align" id="signin" v-if="store.state.isLoggedIn"/>
-    <div class="menu-item right-align" id="signin" v-else><router-link to="/sign-in">Sign-in</router-link></div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="navbar-brand">
+        <img src="../assets/chess/WPawn.png" height="60vh" alt="">
+        <a class="navbar-brand" href="/">Checkmate Games</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <!-- <div class="nav-link"><router-link to="/">Example</router-link></div> -->
+          <div class="dropdown nav-link me-auto">
+            <a
+              class="dropdown-toggle navbar-btn"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Games
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li class="dropdown-item"><router-link to="/chess">Chess</router-link></li>
+                <li class="dropdown-item"><router-link to="/checkers">Checkers</router-link></li>
+                <li class="dropdown-item"><router-link to="/tictactoe">Tic Tac Toe</router-link></li>
+            </ul>
+          </div>
+          <UserDropdown v-if="store.state.isLoggedIn"/>
+          <div class="nav-link me-auto" v-else><router-link to="/sign-in">Sign-in</router-link></div>
+          
+        </div>
+      </div>
+    </div>
   </nav>
   <router-view />
 </template>
 
 <script>
-import NavDropdown from "./NavbarDropdown.vue";
 import UserDropdown from "../components/UserDropdown.vue";
 import { useStore } from "vuex";
 //import firebase from 'firebase/compat/app';
@@ -18,7 +43,6 @@ import "firebase/compat/auth";
 export default {
   name: "AppNavbar",
   components: {
-    NavDropdown,
     UserDropdown,
   },
   data() {
@@ -36,47 +60,12 @@ export default {
 </script>
 
 <style scoped>
-nav {
-  background-color: #171717;
-  color: #ededed;
-  overflow: hidden;
-  font-weight: bold;
-}
-
-/* Media query to limit max font-size */
-@media screen and (min-width: 600px) {
-  nav {
-    font-size: 1.6em;
-  }
-}
-
-/* Media query to center navbar elements on small screens*/
-@media screen and (max-width: 600px) {
-  nav {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-a {
-  color: #ededed;
-  text-decoration: none;
-}
 
 .menu-item{
   float: left;
   display: block;
   text-align: center;
   padding: 0.5rem 1rem 0px 0.5rem;
-}
-
-.right-align{
-  float:right;
-  padding-right: 2vw;
-}
-
-.name{
-  padding-left: 2vw;
 }
 
 </style>

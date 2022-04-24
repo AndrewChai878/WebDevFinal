@@ -31,13 +31,26 @@
   font-family: 'Roboto', sans-serif;
 }
 
-
 nav {
-
+  a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a:hover{
+    color: red;
+  }
   a {
     &.router-link-exact-active {
       color: #DA0037;
     }
   }
 }
+
+li{
+  a{
+    color: black;
+  }
+}
+
 </style>

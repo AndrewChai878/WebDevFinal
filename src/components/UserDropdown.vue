@@ -1,11 +1,22 @@
 <template>
-  <div class="dropdown">
-    <button class="dropbtn"><img id="profilePic2" />{{ name }} ▾</button>
-    <div class="dropmenu" id="dropmenu">
-      <div><router-link to="/usersettings">User Settings</router-link></div>
-      <div><router-link to="/" v-on:click="logout()">Logout</router-link></div>
-    </div>
+
+  <div class="dropdown nav-link me-auto">
+    <img id="profilePic2" />
+    <a
+      class="dropdown-toggle navbar-btn"
+      id="dropdownMenuButton1"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
+      {{name}}
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li class="dropdown-item"><router-link to="/usersettings">User Settings</router-link></li>
+        <li class="dropdown-item">
+          <router-link to="/" v-on:click="logout()">Sign-out</router-link>
+        </li>
+    </ul>
   </div>
+
 </template>
 
 <script>
@@ -46,54 +57,11 @@ export default {
 </script>
 
 <style scoped>
-.dropdown {
-  float: left;
-  overflow: hidden;
-  font-size: inherit;
-}
-
-.dropbtn {
-  font-weight: bold;
-  font-size: inherit;
-  border: none;
-  outline: none;
-  background-color: inherit;
-  color: white;
-  margin: 0;
-}
-
-.dropmenu {
-  display: none;
-  position: absolute;
-  background-color: #ededed;
-  min-width: 120px;
-  box-shadow: 0px 2px black;
-  z-index: 1;
-  padding: 10px 0px;
-}
-
-.dropbtn:hover + .dropmenu {
-  display: block;
-}
-
-.dropmenu:hover {
-  display: block;
-}
-
-a {
-  color: #171717;
-
-  text-decoration: none;
-}
 
 #profilePic2 {
   height: 1.5rem;
   padding-right: 0.5rem;
 }
 
-template {
-  display: flex;
-  align-content: right;
-  justify-content: right;
-}
+
 </style>

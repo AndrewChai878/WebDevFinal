@@ -5,6 +5,9 @@ import firebase from 'firebase/compat/app';
 import store from './store/index'
 import 'firebase/storage';
 import 'firebase/compat/storage';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+
 const firebaseConfig = {
     apiKey: "AIzaSyBw2isk4-aYF3JXoUTlf1PDAhpvVWjgHdo",
     authDomain: "webdevfinal-e9585.firebaseapp.com",
