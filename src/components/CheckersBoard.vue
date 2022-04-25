@@ -30,7 +30,7 @@ import checkers from '../js/checkers'
                 // the number of the most recently clicked piece (1=red, 2= red-king, 3=black, 4=black-king)
                 currentPieceNum:0,
             }
-        },
+        }, 
 
         methods: {
             // assigns a class which determines if the square is black or white
@@ -109,8 +109,12 @@ import checkers from '../js/checkers'
                         
                         // check for winner
                         let winner = checkers.checkWin()
-                        if(winner == 'red'){alert('Player 1 wins')}
-                        if(winner == 'black'){alert('Player 2 wins')}
+                        if(winner == 'red'){
+                            this.$emit('win', 'red')
+                        }
+                        if(winner == 'black'){
+                            this.$emit('win', 'black')
+                        }
 
                         // check for followup
                         this.followUpMove(id)
@@ -139,13 +143,16 @@ import checkers from '../js/checkers'
                 }
             },
 
+            init: function(){
+                this.board = checkers.generateBoard();
+                this.turn = Math.floor(Math.random() * 2)==0? this.turn=0: this.turn =1
+                this.$emit('turn', this.turn)
+            }
+
         },
 
         mounted(){
-            this.board = checkers.generateBoard();
-            // randomly decides who is going first
-            this.turn = Math.floor(Math.random() * 2)==0? this.turn=0: this.turn =1
-            this.$emit('turn', this.turn)
+            this.init();
         }
     }
 </script>
