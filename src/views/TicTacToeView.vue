@@ -31,18 +31,19 @@
 
 
 <style scoped>
+.info{
+    margin: 25% 5%;
+    margin-right: 5%;
+}
+
 .container{
     display: flex;
     width: 100%;
-    box-sizing: border-box;
 }
 
 .board{
     flex: 50%;
-}
-
-img{
-    width: 120px;
+    display: flex;
 }
 
 </style>
