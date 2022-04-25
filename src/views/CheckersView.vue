@@ -1,9 +1,11 @@
 <template>
   <div class="row">
     <div class="board">
-      <CheckersBoard 
-      v-on:turn="turn=$event%2" 
-      v-on:eat="$event==1?numReds-=1:numBlacks-=1"
+      <CheckersBoard
+        v-on:turn="turn=$event%2" 
+        v-on:eat="$event==1?numReds-=1:numBlacks-=1"
+        v-on:win="winGame($event)" 
+        ref="checkersBoard"
       />
     </div>
     <div class="column">
@@ -20,6 +22,11 @@
         Player 2:
         <div class="pieceContainer"><img v-for="index in (12 - this.numBlacks)" src="../assets/checkers/black.png" :key="index" /></div>
       </div> 
+      <PopUp
+        :name="this.winner"
+        v-on:response="handleResponse($event)" 
+        v-if="popup"
+      />
     </div>
   </div>
  
@@ -27,6 +34,7 @@
 
 <script>
 import CheckersBoard from "../components/CheckersBoard.vue"
+import PopUp from "../components/Popup.vue";
 
 export default {
   name: 'App',
@@ -35,15 +43,39 @@ export default {
       turn:1,
       numReds:12,
       numBlacks:12,
+      winner:'',
+      popup:false,
     }
   },
   
   components: {
     CheckersBoard,
+    PopUp,
+},
+
+  methods:{
+    winGame: function(event){
+      this.winner = event;
+      this.popup=true;
+    },
+
+    handleResponse: function(event){
+      this.popup = false
+      if(event == 'yes'){
+        this.playAgain()
+      }
+    },
+
+    playAgain: function(){
+      this.numReds = 12
+      this.numBlacks = 12
+      this.winner = ''
+      this.$refs.checkersBoard.init()
+    }
   },
 
 }
-</script>
+</script> 
 
 <style scoped>
 div{
