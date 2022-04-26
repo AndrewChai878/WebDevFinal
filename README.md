@@ -19,10 +19,16 @@ Welcome to checkmate games!
 
 Our site allows for user to login and play Chess, Checkers, Tic Tac Toe and Connect Four!
 
-# Running Instructions
+# Site Running Instructions
 - Clone the repo
 - Run 'npm i' to install all of the packages
 - To run the site run 'npm run serve'
+
+# Backend Running Instructions (to be done after cloning the repo)
+- cd to the node_server director
+- run 'npm i' to install all of the packages
+- run 'nodemon' to run the backend node js server
+- you may need to run 'npm install nodemon' before running the server
 
 # Site Elements
 SVG and HTML
@@ -41,9 +47,10 @@ DHTML
 
 AJAX, web services
 -   The vue frontend accesses firebase for user authentication
+-   Uses axios to get a quote from the Node.js server
 
 Node.js
--   TODO
+-   Serves a quote to be displayed on the front end
 
 Views and/or client-side framework
 -   We use Vue as the framework for our site
