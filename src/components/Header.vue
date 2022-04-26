@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/-Insert_image_here-.svg/320px--Insert_image_here-.svg.png?20140519172944" alt="[INSERT LOGO HERE]">
+        <img src="../assets/branding/logo.svg" alt="Checkmate Games">
     </div>
 </template>
 
@@ -12,7 +12,7 @@
 
 <style scoped>
 div{
-    height: 100px;
+    height: 18vh;
     display: flex;
     align-content: center;
     justify-content: center;
@@ -20,7 +20,9 @@ div{
 }
 
 img{
-    max-width:100%;
+    height:130%;
+    padding-bottom: 3vh;
+    width:auto;
 }
 
 </style>

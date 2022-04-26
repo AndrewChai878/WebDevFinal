@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <div class="navbar-brand">
-        <img src="../assets/chess/WPawn.png" height="60vh" alt="">
+        <img src="../assets/branding/crowned-pawn.svg" height="60vh" alt="">
         <a class="navbar-brand" href="/">Checkmate Games</a>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,14 +58,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-.menu-item{
-  float: left;
-  display: block;
-  text-align: center;
-  padding: 0.5rem 1rem 0px 0.5rem;
-}
-
-</style>

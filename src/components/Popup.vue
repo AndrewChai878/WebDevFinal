@@ -78,8 +78,4 @@ button{
     border-style: none;
 }
 
-.popup-inner{
-    background: whitesmoke;
-}
-
 </style>
