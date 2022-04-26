@@ -149,6 +149,7 @@ table{
     width: 80vh;
     border-collapse: collapse;
     margin: auto;
+    padding: auto;
 }
 
 td:hover{
@@ -158,6 +159,18 @@ td:hover{
 td{
     width: 33.33%;
     height: 33.33%;
+}
+
+.button{
+    white-space: nowrap;
+    margin: 37.5% 5%;
+}
+
+.button button{
+    background-color: #DA0037;
+    font-size: 1.875em;
+    border-radius: 12px;
+    padding: 10% 30%;
 }
 
 .winner{
