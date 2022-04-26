@@ -6,6 +6,7 @@ import ChessView from '../views/ChessView.vue'
 import TicTacToeView from '../views/TicTacToeView'
 import CheckersView from '../views/CheckersView.vue'
 import UserSettings from '../views/UserSettingsView.vue'
+import ConnectFourView from '../views/ConnectFourView.vue'
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/checkers',
     name: 'checkers',
     component: CheckersView
+  },
+  {
+    path: '/connect4',
+    name: 'connect4',
+    component: ConnectFourView
   },
   {
     path: '/usersettings',

@@ -22,6 +22,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li class="dropdown-item"><router-link to="/chess">Chess</router-link></li>
                 <li class="dropdown-item"><router-link to="/checkers">Checkers</router-link></li>
+                <li class="dropdown-item"><router-link to="/connect4">Connect-4</router-link></li>
                 <li class="dropdown-item"><router-link to="/tictactoe">Tic Tac Toe</router-link></li>
             </ul>
           </div>
