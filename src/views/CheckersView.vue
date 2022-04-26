@@ -23,7 +23,8 @@
         <div class="pieceContainer"><img v-for="index in (12 - this.numBlacks)" src="../assets/checkers/black.png" :key="index" /></div>
       </div> 
       <PopUp
-        :name="this.winner"
+        :message="this.winner + ' Won!'"
+        :win="true"
         v-on:response="handleResponse($event)" 
         v-if="popup"
       />

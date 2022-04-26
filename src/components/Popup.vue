@@ -1,6 +1,6 @@
 <template>
-	<div class="popup">
-        <div class="title">🎉{{name}} Won!🎉</div>
+	<div class="popup" v-if="win">
+        <div class="title">🎉 {{message}} 🎉</div>
         <div class="popup-inner">
             <span class="body">Would you like to play again?</span>
             <div class="button-container">
@@ -10,6 +10,18 @@
             </div>
         </div>
 	</div>
+    <div class="popup" v-else>
+        <div class="title">❌ {{message}} ❌</div>
+        <div class="popup-inner">
+            <span class="body">Would you like to play again?</span>
+            <div class="button-container">
+                <button class="yes" @click="this.response('yes')">Yes</button>
+                
+                <button class="no" @click="this.response('no')">No</button>
+            </div>
+        </div>
+	</div>
+
 </template>
 
 <script>
@@ -18,7 +30,8 @@ export default {
     name:'PopUp',
     
     props: {
-        name: String,
+        message: String,
+        win: Boolean,
     },
     
     methods: {
