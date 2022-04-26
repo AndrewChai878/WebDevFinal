@@ -7,7 +7,7 @@ Group Members
 
 | Alexander Bianchi | alexBianchi4 ([https://github.com/alexBianchi4](https://github.com/alexBianchi4 "https://github.com/alexBianchi4"))
 
-| Wahbi Raihan | - Wahbi-R (https://github.com/Wahbi-R)
+| Wahbi Raihan | Wahbi-R (https://github.com/Wahbi-R)
 
 | Benjamin Tsoumagas | benjamin-tsoumagas ([https://github.com/benjamin-tsoumagas](https://github.com/benjamin-tsoumagas "https://github.com/benjamin-tsoumagas"))
 
