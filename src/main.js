@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import firebase from 'firebase/compat/app';
 import store from './store/index'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import 'firebase/storage';
 import 'firebase/compat/storage';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -33,4 +35,4 @@ firebase.auth().onAuthStateChanged(user => {
       }
     });
 
-createApp(App).use(router).use(store).mount('#app')
+createApp(App).use(router).use(store).use(VueAxios, axios).mount('#app')
