@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <img id="profilePic" />
+      <img id="profilePic" @click="changeImage()"/>
       <div id="bottom" v-if="changingName">
         <input
           type="text"
@@ -52,6 +52,9 @@ export default {
     });
   },
   methods: {
+    changeImage() {
+      console.log("temp")
+    },
     changeDisplayName() {
       this.changingName = true;
     },
@@ -68,8 +71,10 @@ export default {
 
 <style>
 #profilePic {
+  cursor: pointer;
   height: 33%;
   width: 33%;
   margin: 0% 33%;
 }
+
 </style>
