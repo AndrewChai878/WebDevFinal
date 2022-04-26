@@ -1,6 +1,5 @@
 <template>
   <div>
-    This is all about you my man!
     <div class="card">
       <img id="profilePic" />
       <div id="bottom" v-if="changingName">
@@ -69,6 +68,8 @@ export default {
 
 <style>
 #profilePic {
-  height: 10rem;
+  height: 33%;
+  width: 33%;
+  margin: 0% 33%;
 }
 </style>
