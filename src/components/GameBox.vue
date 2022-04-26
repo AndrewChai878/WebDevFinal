@@ -1,7 +1,7 @@
 <template>
     <div>
         <router-link :to="route">
-            <img :src="img_src" alt="Game Image"/>
+            <img :src="img_src" alt="Game Image">
         </router-link>
     </div>
     <router-view/>

@@ -1,5 +1,4 @@
 <template>
-  <div>Put home components/code here</div>
   <HomeContainer/>
 </template>
 
