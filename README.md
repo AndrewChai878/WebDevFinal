@@ -4,10 +4,15 @@
 Group Members
 
 | Josh Zak | Josh-Zak ([https://github.com/Josh-Zak](https://github.com/Josh-Zak "https://github.com/Josh-Zak"))
+
 | Alexander Bianchi | alexBianchi4 ([https://github.com/alexBianchi4](https://github.com/alexBianchi4 "https://github.com/alexBianchi4"))
+
 | Wahbi Raihan | - Wahbi-R (https://github.com/Wahbi-R)
+
 | Benjamin Tsoumagas | benjamin-tsoumagas ([https://github.com/benjamin-tsoumagas](https://github.com/benjamin-tsoumagas "https://github.com/benjamin-tsoumagas"))
+
 | Andrew Chai | AndrewChai878 (https://github.com/AndrewChai878)
+
 
 # Description
 Welcome to checkmate games!
