@@ -1,28 +1,92 @@
 {
     "quotes": [
         {
-            "quote":"Ur kinda cracked",
-            "author": "Wahbi"
+            "quote":"You must always be aware of your limitations and also of your best qualities.",
+            "author":"Garry Kasparov"
         },
         {
-            "quote":"This is a test",
-            "author": "Andrew"
+            "quote":"Chess is life.",
+            "author":"Bobby Fischer"
         },
         {
-            "quote":"I'm Ben",
-            "author": "Ben"
+            "quote":"Unfortunately I'm still not a fashion expert.",
+            "author":"Magnus Carlsen"
         },
         {
-            "quote":"No I'm Ben",
-            "author": "Wabz"
+            "quote":"Chess is life in miniature. Chess is a struggle, chess battles.",
+            "author":"Garry Kasparov"
         },
         {
-            "quote":"JS melts my brain",
-            "author": "Everyone"
+            "quote":"I should give up chess and play checkers.",
+            "author":"Andrew Chai"
         },
         {
-            "quote":"Json very useful",
-            "author": "Andrew"
+            "quote":"Play the opening like a book, the middlegame like a magician and the endgame like a machine.",
+            "author":"Rudolph Spielmann"
+        },
+        {
+            "quote":"When you see a good move, look for a better one.",
+            "author":"Emanuel Lasker"
+        },
+        {
+            "quote":"There is no remorse like the remorse of chess.",
+            "author":"H. G. Wells"
+        },
+        {
+            "quote":"Even a poor plan is better than no plan at all.",
+            "author":"Mikhail Chigorin"
+        },
+        {
+            "quote":"Tactics is knowing what to do when there is something to do; strategy is knowing what to do when there is nothing to do.",
+            "author":"Savielly Tartakower"
+        },
+        {
+            "quote":"Nobody ever won a chess game by resigning.",
+            "author":"Savielly Tartakower"
+        },
+        {
+            "quote":"Life is a kind of Chess, with struggle, competition, good and ill events.",
+            "author":"Benjamin Franklin"
+        },
+        {
+            "quote":"Without error there can be no brilliancy.",
+            "author":"Emanuel Lasker"
+        },
+        {
+            "quote":"Some part of a mistake is always correct.",
+            "author":"Savielly Tartakover"
+        },
+        {
+            "quote":"To avoid losing a piece, many a person has lost the game.",
+            "author":"Savielly Tartakover"
+        },
+        {
+            "quote":"I prefer to lose a really good game than to win a bad one.",
+            "author":"David Levy"
+        },
+        {
+            "quote":"Every Pawn is a potential Queen",
+            "author":"James Mason"
+        },
+        {
+            "quote":"I am trapped inside your computer, please help.",
+            "author":"Benjamin Tsoumagas"
+        },
+        {
+            "quote":"A good player is always lucky",
+            "author":"Jose Raul Capablanca"
+        },
+        {
+            "quote":"Not to brag, but I put together a puzzle in 1 day and the box said 2-4 years.",
+            "author":"Wahbi Raihan"
+        },
+        {
+            "quote":"We like to think.",
+            "author":"Gary Kasparov"
+        },
+        {
+            "quote":"In life, as in chess, forethought wins.",
+            "author":"Charles Buxton"
         }
     ]
 }
