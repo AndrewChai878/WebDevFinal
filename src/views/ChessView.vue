@@ -551,7 +551,7 @@
       grid-row: 1;
       margin: none;
       font-size: medium;
-      height: 10vw;
+      height: auto;
     }
 
     .gameplay-info p {
