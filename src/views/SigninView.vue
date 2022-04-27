@@ -1,6 +1,5 @@
 <template>
   <div class = "sign-in">
-    put sign-in components/code here
     <form>
       <input type="email" placeholder="email" v-model="email"/> 
       <br>
@@ -29,10 +28,10 @@ import 'firebase/compat/storage';
     login() {
       console.log("temp");
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(()=> {
-        console.log("logged in u rat")
-        alert("logged in u baka")}).catch(() => {
-          console.log("u messed up login u dent")
-          alert("you messed login up u dent")});
+        console.log("Logged in!")
+        alert("Logged in!")}).catch(() => {
+          console.log("Login failure!")
+          alert("Login failure!")});
           
     },
     register() {
@@ -55,9 +54,11 @@ import 'firebase/compat/storage';
       storageRef.put(blob)
     });
         data.user.sendEmailVerification();
+        console.log("Registration email sent, please log in!")
+        alert("Registration email sent, please log in!")
       }).catch(() => {
-          console.log("u messed register up u dent")
-          alert("you messed register up u dent")});
+          console.log("Registration failure!")
+          alert("Registration failure!")});
     }
   }
   }
