@@ -41,19 +41,19 @@ SVG and HTML
 -   SVG files are used for various graphics throughout the site
 
 CSS and CSS frameworks
--   SCSS is used within vue to style our views
+-   SCSS is used within Vue to style our views
 -   Bootstrap is used for our navbar
 
 JavaScript, jQuery, D3
--   Ours games are created entirely in javascript
--   Though JQuery is not really needed in a vue project, to showcase the ability to use it, it has been used multiple times
+-   Ours games are created entirely in JavaScript
+-   Though jQuery is not really needed in a Vue project, to showcase the ability to use it, it has been used multiple times
     in UserSettingsView.vue
 
 DHTML
--   We use vue and javascript to make our html based views dynamically interact with users allowing them to play games.
+-   We use Vue and JavaScript to make our html based views dynamically interact with users allowing them to play games.
 
 AJAX, web services
--   The vue frontend accesses firebase for user authentication
+-   The Vue frontend accesses Firebase for user authentication
 -   Uses axios to get a quote from the Node.js server
 
 Node.js
@@ -63,10 +63,10 @@ Views and/or client-side framework
 -   We use Vue as the framework for our site
 
 Database
--   We implemented firebase authentication and firestore as our database and independent study portion of the project
+-   We implemented Firebase authentication, Firebase Realtime Database and Firebase Storage as our database and independent study portion of the project
 
 # Independent Study
-For our independent study portion, we used firebase. Firebase is an API created by google that contains many features. 
+For our independent study portion, we used Firebase. Firebase is an API created by google that contains many features. 
 In our case we use its features for these purposes:
 
 Authentication
