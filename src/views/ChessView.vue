@@ -2,7 +2,7 @@
   <section class="play-area">
     <div v-if="!mobile" class = "gameplay-info">
             <p>
-              Game Information <br> <br>
+              Game Information<br> <br>
             </p>
             <div class = "game-turn">
               <p>
@@ -72,80 +72,120 @@
       trimmedBoard(){
         //return a board without the padding
         return this.active_board.slice(2,10).map(function(val){
-          return val.slice(2,10)
+          return val.slice(2,10);
         })
       },
 
       inCheck(){
         if (this.active_board != null){
           if (chess.kingInCheck(this.active_board, 1)){
-            return "In Check: White"
+            return "In Check: White";
           }
           else if (chess.kingInCheck(this.active_board, -1)){
-            return "In Check: Black"
+            return "In Check: Black";
           }
           else {
-            return null
+            return null;
           }
         } else {
-          return null
+          return null;
         }
       },
 
       playerTurn(){
         if (this.side == 1){
-          return "Turn: White"
+          return "Turn: White";
         } else {
-          return "Turn: Black"
+          return "Turn: Black";
         }
       },
 
       gameOver(){
         if (this.active_board != null){
             if (chess.isGameOver(this.active_board, 1) == "Checkmate"){
-              return "White Is Checkmated"
+              return "White Is Checkmated";
             }
             if (chess.isGameOver(this.active_board, 1) == "Stalemate"){
-              return "Draw! White Is Stalemated"
+              return "Draw! White Is Stalemated";
             }
             if (chess.isGameOver(this.active_board, -1) == "Checkmate"){
-              return "Black Is Checkmated"
+              return "Black Is Checkmated";
             }
             if (chess.isGameOver(this.active_board, -1) == "Stalemate"){
-              return "Draw! Black Is Stalemated"
+              return "Draw! Black Is Stalemated";
             }
             else {
-              return null
+              return null;
             }
           }
         else {
-          return null
+          return null;
         } 
       },
 
       gameDone(){
         if (this.active_board != null){
           if (chess.isGameOver(this.active_board, 1) == "Checkmate"){
-            return true
+            return true;
           }
           if (chess.isGameOver(this.active_board, 1) == "Stalemate"){
-            return true
+            return true;
           }
           if (chess.isGameOver(this.active_board, -1) == "Checkmate"){
-             return true
+             return true;
           }
           if (chess.isGameOver(this.active_board, -1) == "Stalemate"){
-            return true
+            return true;
           }
           else {
-            return false
+            return false;
           }
         }
         else{
-          return null
+          return null;
         }
-      }
+      },
 
+      materialBalance(){
+        
+        let material = 0;
+        if (this.active_board != null){
+            let b = this.active_board.slice(2,10).map(function(val){
+            return val.slice(2,10)
+          });
+
+          //add the values of all the pieces on the board
+          for (let i = 0; i < b.length; i++){
+            for (let j = 0; j < b[i].length; j++){
+              //if the piece is a knight we need a special case
+              if (b[i][j] == -2){
+                material = material - 3;
+              }
+              else if (b[i][j] == 2){
+                material = material + 3;
+              }
+              //if the piece is a rook we need a special case
+              else if (b[i][j] == -4){
+                material = material - 5;
+              }
+              else if (b[i][j] == 4){
+                material = material + 5;
+              }
+              //if the piece is a queen we need a special case
+              else if (b[i][j] == -5){
+                material = material - 9;
+              }
+              else if (b[i][j] == 5){
+                material = material + 9;
+              }
+              else {
+                material = material + b[i][j];
+              }
+            }
+          }
+        }
+        return material;
+      }
 
     },
     created(){
@@ -154,9 +194,9 @@
       })
     },
     mounted(){
-        this.active_board = chess.generateEmptyBoard()
-        this.active_board = chess.setBoard(this.active_board)
-        console.log(this.trimmedBoard)
+        this.active_board = chess.generateEmptyBoard();
+        this.active_board = chess.setBoard(this.active_board);
+        console.log(this.trimmedBoard);
     },
     methods: {
       getPieceAsset(piece_value){
