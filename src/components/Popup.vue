@@ -35,6 +35,8 @@
 export default {
     name:'PopUp',
     
+    emits:['response'],
+    
     props: {
         message: String,
         win: Boolean,

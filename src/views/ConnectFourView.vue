@@ -2,8 +2,8 @@
     <div class="container">
         <div class="info">
             <h2>Turn:</h2>
-            <img v-if="turn == 0" src="../assets/connect4/red-coin.svg" class="animate__animated animate__rotateIn" alt="red">
-            <img v-else-if="turn == 1" src="../assets/connect4/yellow-coin.svg" class="animate__animated animate__rotateIn" alt="yellow">
+            <img v-if="turn == 0" src="../assets/connect4/red-coin.svg" class="animate__animated animate__flipInY" alt="red">
+            <img v-else-if="turn == 1" src="../assets/connect4/yellow-coin.svg" class="animate__animated animate__flipInY" alt="yellow">
         </div>
 
         <div class="board">

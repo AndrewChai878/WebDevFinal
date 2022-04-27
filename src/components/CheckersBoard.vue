@@ -17,6 +17,7 @@
 import checkers from '../js/checkers'
     export default{
         name:"CheckersBoard",
+        emits:['turn','win','eat'],
         data(){
             return{
                 // the representation of the game board

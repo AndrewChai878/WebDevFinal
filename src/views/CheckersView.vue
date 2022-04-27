@@ -11,16 +11,18 @@
     <div class="column">
       <div class="container">
         CURRENT TURN: 
-        <img v-if="turn == 0" src="../assets/checkers/red.png">
-        <img v-else-if="turn == 1" src="../assets/checkers/black.png">
+        <img v-if="turn == 0" src="../assets/checkers/red.png" class="animate__animated animate__flipInY">
+        <img v-else-if="turn == 1" src="../assets/checkers/black.png" class="animate__animated animate__flipInY">
       </div> 
       <div class="pieces">
         Player 1:
-        <div class="pieceContainer"><img v-for="index in (12 - this.numReds)" src="../assets/checkers/red.png" :key="index" /></div>
+        <div class="pieceContainer"><img v-for="index in (12 - this.numReds)" src="../assets/checkers/red.png" 
+        class="animate__animated animate__bounce" :key="index" /></div>
       </div> 
       <div class="pieces">
         Player 2:
-        <div class="pieceContainer"><img v-for="index in (12 - this.numBlacks)" src="../assets/checkers/black.png" :key="index" /></div>
+        <div class="pieceContainer"><img v-for="index in (12 - this.numBlacks)" src="../assets/checkers/black.png" 
+        class="animate__animated animate__bounce" :key="index" /></div>
       </div> 
       <PopUp
         :message="this.winner + ' Won!'"
@@ -37,6 +39,7 @@
 <script>
 import CheckersBoard from "../components/CheckersBoard.vue"
 import PopUp from "../components/Popup.vue";
+import 'animate.css'
 
 export default {
   name: 'App',

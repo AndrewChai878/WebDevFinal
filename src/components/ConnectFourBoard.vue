@@ -16,6 +16,7 @@ import connect4 from '../js/connect4'
 
     export default{
         name: 'ConnectFourBoard',
+        emits:['turn','win','draw'],
         data(){
             return{
                 // the representation of the game board
