@@ -3,7 +3,10 @@
     <form>
       <input type="email" placeholder="email" v-model="email"/> 
       <br>
-      <input type="password" placeholder="password" v-model="password"/>
+      <div class = "passwordSection">
+        <input type="password" placeholder="password" v-model="password"/>
+        <button class="link" style="background:none; border:none; padding: 0px; margin: 0px; text-align: right; " v-on:click="forgotPassword()">Forgot Password</button>
+      </div>
       <br>
       <button type="button" v-on:click="login()">Login</button>
       <br>
@@ -34,30 +37,7 @@ import 'firebase/compat/storage';
           
     },
     register() {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(data => {
-        data.user.updateProfile({
-          displayName: "User"
-        });
-            var tempUser = firebase.auth().currentUser;
-
-    let storageRef = firebase.storage().ref(tempUser.uid + '/profilePicture/avatar.png', );
-
- 
-    fetch('default-avatar.png')
-    .then(function(response) {
-      
-      return response.blob()
-    })
-    .then(function(blob) {
-      // here the image is a blob
-      storageRef.put(blob)
-    });
-        data.user.sendEmailVerification();
-        console.log("Registration email sent, please log in!")
-        alert("Registration email sent, please log in!")
-      }).catch(() => {
-          console.log("Registration failure!")
-          alert("Registration failure!")});
+      this.$router.push('/register');
     }
   }
   }
@@ -66,6 +46,14 @@ import 'firebase/compat/storage';
 </script>
 
 <style scoped lang="scss">
+
+  .passwordSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .sign-in {
     padding: 10% 0%;
     text-align: center;

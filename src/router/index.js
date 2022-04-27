@@ -7,6 +7,7 @@ import TicTacToeView from '../views/TicTacToeView'
 import CheckersView from '../views/CheckersView.vue'
 import UserSettings from '../views/UserSettingsView.vue'
 import ConnectFourView from '../views/ConnectFourView.vue'
+import RegisterView from '../views/RegisterView.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/sign-in',
     name: 'sign-in',
     component: SigninView
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterView
   },
   {
     path: '/settings',
