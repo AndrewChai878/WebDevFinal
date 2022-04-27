@@ -1,6 +1,6 @@
 <template>
   <section class="play-area">
-    <div class = "gameplay-info">
+    <div v-if="!mobile" class = "gameplay-info">
             <p>
               Game Information <br> <br>
             </p>
@@ -15,6 +15,17 @@
                 {{inCheck}}  <br> <br>
               </p>
             </div>
+    </div>
+    <div v-if="mobile" class = "gameplay-info">
+            <p>
+              Game Information
+            </p>
+            <p v-if="!gameDone">
+              {{playerTurn}}
+            </p>
+            <p v-else>
+              {{gameOver}}
+            </p>           
     </div>
     <div class = "board">
         <div v-if="active_board">
@@ -53,7 +64,8 @@
         have_kings_moved: [false,false],
         have_rooks_moved: [false,false,false,false],
         move_history: "",
-        move_counter: 1
+        move_counter: 1,
+        mobile: window.innerWidth <= 784
       }
     },
     computed: {
@@ -109,9 +121,37 @@
         else {
           return null
         } 
+      },
+
+      gameDone(){
+        if (this.active_board != null){
+          if (chess.isGameOver(this.active_board, 1) == "Checkmate"){
+            return true
+          }
+          if (chess.isGameOver(this.active_board, 1) == "Stalemate"){
+            return true
+          }
+          if (chess.isGameOver(this.active_board, -1) == "Checkmate"){
+             return true
+          }
+          if (chess.isGameOver(this.active_board, -1) == "Stalemate"){
+            return true
+          }
+          else {
+            return false
+          }
+        }
+        else{
+          return null
+        }
       }
 
 
+    },
+    created(){
+      addEventListener('resize', () =>{
+        this.mobile = innerWidth <= 784;
+      })
     },
     mounted(){
         this.active_board = chess.generateEmptyBoard()
@@ -494,6 +534,69 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+    .play-area{
+      display: grid;
+      grid-template-columns: none;
+      grid-template-rows: auto auto auto;
+      background-color: green;
+      margin: auto; 
+      justify-content: center;
+    }
+    .gameplay-info{
+      grid-column: none;
+      grid-row: 1;
+      margin: none;
+      font-size: medium;
+      height: 10vw;
+    }
+
+    .gameplay-info p {
+      margin: 0;
+    }
+
+    .board{
+      grid-column: none;
+      grid-row: 2;
+    }
+
+    .board table {
+      width: 80vw;
+      height: 80vw;
+      margin: none;
+    }
+
+    .board table tr td{
+      width: 10vw;
+      height: 10vw;
+    }
+
+    .board table tr td div{
+      width: 10vw;
+      height: 10vw;
+    }
+
+    .piece-image{
+      width: 10vw;
+      height: 10vw;
+    }
+
+    .board table tr td:hover{
+      width: 10vw;
+      height: 10vw;
+    }
+
+    .move-history{
+      grid-column: none;
+      grid-row: 3;
+      padding: none;
+      margin: none;
+    }
+
+
   }
 
 </style>
