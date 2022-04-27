@@ -52,7 +52,7 @@ export default {
         });
         this.name = user.displayName;
       } else {
-          console.log("not logged in idiot")
+          console.log("Not logged in.");
       }
     });
   },
