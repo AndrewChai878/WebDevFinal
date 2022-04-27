@@ -28,7 +28,7 @@ Our site allows for user to login and play Chess, Checkers, Tic Tac Toe and Conn
 - cd to the node_server director
 - run 'npm i' to install all of the packages
 - run 'nodemon' to run the backend node js server
-- you may need to run 'npm install nodemon' before running the server
+- you may need to run 'npm -g install nodemon' before running the server
 
 # Site Elements
 
