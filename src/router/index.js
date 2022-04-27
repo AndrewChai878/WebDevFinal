@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SigninView from '../views/SigninView.vue'
-import SettingsView from '../views/SettingsView.vue'
 import ChessView from '../views/ChessView.vue'
 import TicTacToeView from '../views/TicTacToeView'
 import CheckersView from '../views/CheckersView.vue'
@@ -24,11 +23,6 @@ const routes = [
     path: '/register',
     name: 'register',
     component: RegisterView
-  },
-  {
-    path: '/settings',
-    name: 'settings',
-    component: SettingsView
   },
   {
     path: '/chess',
