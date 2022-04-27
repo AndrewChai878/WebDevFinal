@@ -189,13 +189,14 @@ td{
 
 /* Responsive layout*/
 @media screen and (max-width: 800px) {
+    .tttBoard{
+        display: block;
+    }
+
     table{
         background-image: url(../assets/tictactoe/board.png);
         width: 40vh;
         height: 40vh;
-        border-collapse: collapse;
-        margin: auto;
-        padding: auto;
     }
 
     table img {
