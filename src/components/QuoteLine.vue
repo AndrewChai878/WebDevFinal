@@ -1,6 +1,7 @@
 <template>
 	<div>
-        <p> {{quote}} - {{author}} </p>
+        <p class = "quote"> "{{quote}}" </p>
+        <p class = "author"> {{author}} </p>
     </div>
 </template>
 
@@ -28,5 +29,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.quote {
+    font-size: large;
+}
+
+.author {
+    font-style: italic;
+}
 
 </style>
