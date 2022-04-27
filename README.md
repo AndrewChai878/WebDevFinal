@@ -64,6 +64,8 @@ Views and/or client-side framework
 
 Database
 -   We implemented Firebase authentication, Firebase Realtime Database and Firebase Storage as our database and independent study portion of the project
+-   Use signup saves user's email, username and password
+-   Users can set their own profile picture which is saved
 
 # Independent Study
 For our independent study portion, we used Firebase. Firebase is an API created by google that contains many features. 
