@@ -13,6 +13,7 @@ Group Members
 
 | Andrew Chai | AndrewChai878 (https://github.com/AndrewChai878)
 
+(https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/branding/logo.svg)
 
 # Description
 Welcome to checkmate games!
@@ -89,7 +90,7 @@ Presentation File
 
 https://docs.google.com/presentation/d/1bHrRHbIyKQju-FpWhkQ8XGzZlKGQkAAAWPHDS5XHu78/edit?usp=sharing
 
-# Things We Thing Are Cool
+# Things We Think Are Cool
 -   Animated Quotes!
 ![Animated Quotes](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/animated_text.gif)
 -   Sign Up!
