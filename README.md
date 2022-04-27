@@ -45,7 +45,7 @@ CSS and CSS frameworks
 -   Bootstrap is used for our navbar
 
 JavaScript, jQuery, D3
--   Ours games are created entirely in JavaScript
+-   Our games are created entirely in JavaScript
 -   There is an SVG chart made with D3 on the Chess page
 -   Though jQuery is not really needed in a Vue project, to showcase the ability to use it, it has been used multiple times
     in UserSettingsView.vue
@@ -84,3 +84,25 @@ Hosting
 -   Firebase Hosting keeps the website running 24/7 without having to run it ourselves with npm run serve. The website is currently hosted at
     https://webdevfinal-e9585.web.app/
     (the node.js server still has to be run manually)
+    
+Presentation File
+
+https://docs.google.com/presentation/d/1bHrRHbIyKQju-FpWhkQ8XGzZlKGQkAAAWPHDS5XHu78/edit?usp=sharing
+
+# Things We Thing Are Cool
+-   Animated Quotes!
+![Animated Quotes](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/animated_text.gif)
+-   Sign Up!
+![Signup](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/sign_in.gif)
+-   Swap Your Profile Picture!
+![Profile Picture](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/Swap_Profile_Picture.gif)
+-   Swap Your Display Name!
+![Display Name](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/display_name.gif)
+-   Play Checkers!
+![Checkers](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/checkers-win.gif)
+-   Play Chess (on your phone as well)!
+![Chess](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/chess_mobile.gif)
+-   Play Connect 4!
+![Connect 4](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/connect4_win.gif)
+-   Play TicTacToe!
+![TicTacToe](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/tic_tac_toe_win.gif)
