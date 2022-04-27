@@ -28,8 +28,6 @@ firebase.auth().onAuthStateChanged(user => {
     console.log("Welcome back", user.displayName)
     store.state.isLoggedIn = true;
 
-
-    console.log('temp')
       } else{
         //Not logged in
       }

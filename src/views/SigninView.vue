@@ -26,7 +26,6 @@ import 'firebase/compat/storage';
     };},
     methods: {
     login() {
-      console.log("temp");
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(()=> {
         console.log("Logged in!")
         alert("Logged in!")}).catch(() => {
@@ -37,7 +36,7 @@ import 'firebase/compat/storage';
     register() {
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(data => {
         data.user.updateProfile({
-          displayName: "Probably Not Wabz"
+          displayName: "User"
         });
             var tempUser = firebase.auth().currentUser;
 
