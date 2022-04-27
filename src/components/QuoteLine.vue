@@ -1,12 +1,13 @@
 <template>
 	<div>
-        <p class = "quote"> "{{quote}}" </p>
-        <p class = "author"> {{author}} </p>
+        <p class = "quote animate__animated animate__backInLeft"> "{{quote}}" </p>
+        <p class = "author animate__animated animate__backInRight"> {{author}} </p>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import 'animate.css'
 
 export default {
     name:'QuoteLine',

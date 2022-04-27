@@ -3,8 +3,8 @@
         <table id = "tttBoard-table">
             <tr v-for="(row,i) in this.board" :key="i">
                 <td v-for="(col,j) in row" :key="j" @click="move($event)" :id="''+i+j">
-                    <img v-if="this.board[i][j] == 0" src="../assets/tictactoe/x.png" :id="''+i+j"/>
-                    <img v-else-if="this.board[i][j] == 1" src="../assets/tictactoe/o.png" :id="''+i+j"/>
+                    <img v-if="this.board[i][j] == 0" src="../assets/tictactoe/x.png" class="animate__animated animate__pulse" :id="''+i+j"/>
+                    <img v-else-if="this.board[i][j] == 1" src="../assets/tictactoe/o.png" class="animate__animated animate__pulse" :id="''+i+j"/>
                 </td>
             </tr>
         </table>
@@ -17,6 +17,8 @@
 
 <script>
 import ttt from '../js/ttt'
+import 'animate.css'
+
 export default {
     name: 'TicTacToeBoard',
     emits: ["turn", "getWinner"],
