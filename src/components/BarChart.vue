@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        Material Balance
+        Material Balance: {{sign}}{{Math.abs(data[1].value - data[0].value)}}
+        {{sideWithAdvantage}}
         <svg id="chart">
         </svg>
     </div>
@@ -8,6 +9,7 @@
 
 <script>
 import * as d3 from 'd3';
+
 export default{
     name: 'BarChart',
     props: {
@@ -20,6 +22,31 @@ export default{
     },
     mounted(){
         this.drawChart()
+    },
+    computed:{
+        sign(){
+            
+            if (Math.sign(this.data[1].value - this.data[0].value) == -1){
+                return "-";
+            }
+            else if (Math.sign(this.data[1].value - this.data[0].value) == 1){
+                return "+";
+            }
+            else {
+                return " ";
+            }
+        },
+        sideWithAdvantage(){
+            if (Math.sign(this.data[1].value - this.data[0].value) == -1){
+                return " for black";
+            }
+            else if (Math.sign(this.data[1].value - this.data[0].value) == 1){
+                return " for white";
+            }
+            else {
+                return " ";
+            }
+        }
     },
     methods:{
         drawChart: function(){
