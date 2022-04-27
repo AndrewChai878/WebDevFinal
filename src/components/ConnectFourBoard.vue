@@ -34,6 +34,7 @@ import connect4 from '../js/connect4'
                 this.coins = 0
                 this.gameover = false
                 this.turn = Math.floor(Math.random() * 2)==0 ? this.turn=0 : this.turn=1
+                this.$emit('turn',this.turn)
             },
             dropPiece: function(event){
                 if(!this.gameover){
@@ -64,6 +65,7 @@ import connect4 from '../js/connect4'
                 }else{
                     // game is not over, increment turn counter
                     this.turn +=1
+                    this.$emit('turn',this.turn%2)
                 }
             },
 

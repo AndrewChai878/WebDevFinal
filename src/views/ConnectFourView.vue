@@ -1,25 +1,34 @@
 <template>
-    <div class="board">
-        <ConnectFourBoard
-            v-on:draw="drawGame()"
-            v-on:win="winGame($event)" 
-            ref="connect4board"
+    <div class="container">
+        <div class="info">
+            <h2>Turn:</h2>
+            <img v-if="turn == 0" src="../assets/connect4/red-coin.svg" alt="red">
+            <img v-else-if="turn == 1" src="../assets/connect4/yellow-coin.svg" alt="yellow">
+        </div>
+
+        <div class="board">
+            <ConnectFourBoard
+                v-on:draw="drawGame()"
+                v-on:win="winGame($event)"
+                v-on:turn="turn=$event"
+                ref="connect4board"
+            />
+        </div>
+        <PopUp
+            :message="this.winner + ' Won!'"
+            :win="true"
+            :option="1"
+            v-on:response="handleResponse($event)" 
+            v-if="popup && (winner != '')"
+        />
+        <PopUp
+            :message="'Match is a draw!'"
+            :win="false"
+            :option="1"
+            v-on:response="handleResponse($event)" 
+            v-if="popup && draw"
         />
     </div>
-    <PopUp
-        :message="this.winner + ' Won!'"
-        :win="true"
-        :option="1"
-        v-on:response="handleResponse($event)" 
-        v-if="popup && (winner != '')"
-    />
-    <PopUp
-        :message="'Match is a draw!'"
-        :win="false"
-        :option="1"
-        v-on:response="handleResponse($event)" 
-        v-if="popup && draw"
-    />
       
 </template>
 
@@ -36,6 +45,7 @@ export default{
             popup:false,
             winner:'',
             draw:false,
+            turn:1,
         }
     },
 
@@ -69,5 +79,15 @@ export default{
 
 <style scoped>
 
+.container{
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+.info{
+    margin-right:5vmin;
+}
 
 </style>

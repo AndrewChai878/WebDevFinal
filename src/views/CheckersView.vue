@@ -84,7 +84,6 @@ div{
   box-sizing: border-box;
 }
 
-/* Create three equal columns that floats next to each other */
 .column {
   flex:25%;
   border-radius: 20px;
@@ -96,7 +95,6 @@ div{
   flex: 75%
 }
 
-/* Clear floats after the columns */
 .row{
   display: flex;
   flex-direction: row;
@@ -113,7 +111,6 @@ div{
 
   .pieces{
     height: 9vh !important;
-    background: blue;
   }
 
 }
