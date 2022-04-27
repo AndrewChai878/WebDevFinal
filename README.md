@@ -31,6 +31,11 @@ Our site allows for user to login and play Chess, Checkers, Tic Tac Toe and Conn
 - you may need to run 'npm install nodemon' before running the server
 
 # Site Elements
+
+User interface, usability
+-   Our site supports mobile! 
+-   Mobile styling for our games makes our site usable with mobile devices
+
 SVG and HTML
 -   Pages are structured using HTML within views
 -   SVG files are used for various graphics throughout the site
