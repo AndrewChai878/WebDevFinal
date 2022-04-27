@@ -3,12 +3,15 @@
     <div class="card">
       <input id="profileImageUpload" style="display:none"  type="file"/>
       <img id="profilePic" @click="changeImage()"/>
+      <div id="progressBar">
+        <div id="actualBar"></div>
+      </div>
       <div id="bottom" v-if="changingName">
         <input
           type="text"
           id="displayName"
           name="displayName"
-          placeholder="{{name}}"
+          :placeholder='[[name]]'
         />
         <button v-on:click="confirmDisplayName()">Confirm Display Name</button>
       </div>
@@ -57,6 +60,8 @@ export default {
     changeImage() {
       console.log("temp")
       $('#profileImageUpload').trigger('click');
+      $('#progressBar').css("visibility", "visible")
+      $('#actualBar').css("width", "0%")
       let uploadImage = document.getElementById('profileImageUpload');
       uploadImage.addEventListener('change', function(event){
         let file = event.target.files[0]
@@ -68,6 +73,7 @@ export default {
     // Observe state change events such as progress, pause, and resume
     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    $('#actualBar').css("width", `${progress + "%"}`)
     console.log('Upload is ' + progress + '% done');
     switch (snapshot.state) {
       case 'paused':
@@ -81,10 +87,12 @@ export default {
   (error) => {
     // Handle unsuccessful uploads
     console.log(error)
+    $('#progressBar').css("visibility", "hidden")
   }, 
   () => {
     // Handle successful uploads on complete
     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+    $('#progressBar').css("visibility", "hidden")
     storageRef.getDownloadURL().then(function (url) {
       document.getElementById("profilePic").src = url;
       window.location.reload();
@@ -119,4 +127,16 @@ export default {
   margin: 0% 33%;
 }
 
+#progressBar {
+  visibility: hidden;
+  width: 100%;
+  background-color: grey;
+}
+
+#actualBar {
+
+  width: 0%;
+  height: 1rem;
+  background-color: aqua;
+}
 </style>
