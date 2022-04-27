@@ -36,10 +36,8 @@ import 'firebase/compat/storage';
       document.getElementById("password").addEventListener("keypress", function(e) {
         if(e.key == "Enter"){
           e.preventDefault();
-
           this.email = document.getElementById("email").value
           this.password = document.getElementById("password").value
-                    console.log(this.email, document.getElementById("password").value)
           firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(()=> {
               console.log("Logged in!")
               this.$router.push('/');
