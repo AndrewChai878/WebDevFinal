@@ -443,7 +443,6 @@
     border-style: solid;
     border-width: 3px;
     border-color: black;
-    overflow: auto;
     margin-left: 2.5vw;
     margin-right: 2.5vw;
     margin-top: 5vw;
