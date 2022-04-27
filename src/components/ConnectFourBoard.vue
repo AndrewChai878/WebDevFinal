@@ -46,15 +46,19 @@ import connect4 from '../js/connect4'
                     if(row != -1){
                         this.board[row][col] = (this.turn%2) + 1
                         this.coins += 1
-                        this.checkWin()
+                        this.checkWin(row, col)
                     }
                 }
             },
-            checkWin: function(){
+            checkWin: function(row, col){
                 // check for win from most recent player
-                
-                // check if board is full
-                if(this.coins == 42){
+                let playerNum = (this.turn%2) + 1
+                let win = connect4.findWin(playerNum, row, col)
+                if(win){
+                    this.gameover = true;
+                    let playerColor = playerNum==1 ? 'Red':'Yellow'
+                    this.$emit('win',playerColor)
+                }else if(this.coins == 42){ // check if board is full
                     this.gameover = true
                     this.$emit('draw')
                 }else{
