@@ -340,6 +340,28 @@ export default {
             if (board[i+1][j-1] == (1)){return true;}
         }
 
+        //make sure there is no enemy king beside you
+        if (s == 1){
+            if (board[i+1][j+1] == (-6)){return true;}
+            if (board[i+1][j] == (-6)){return true;}
+            if (board[i+1][j-1] == (-6)){return true;}
+            if (board[i][j+1] == (-6)){return true;}
+            if (board[i][j-1] == (-6)){return true;}
+            if (board[i-1][j+1] == (-6)){return true;}
+            if (board[i-1][j] == (-6)){return true;}
+            if (board[i-1][j-1] == (-6)){return true;}
+        }
+        if (s == -1){
+            if (board[i+1][j+1] == (6)){return true;}
+            if (board[i+1][j] == (6)){return true;}
+            if (board[i+1][j-1] == (6)){return true;}
+            if (board[i][j+1] == (6)){return true;}
+            if (board[i][j-1] == (6)){return true;}
+            if (board[i-1][j+1] == (6)){return true;}
+            if (board[i-1][j] == (6)){return true;}
+            if (board[i-1][j-1] == (6)){return true;}
+        }
+
         return in_check;
 
     },
