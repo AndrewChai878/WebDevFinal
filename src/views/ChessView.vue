@@ -39,20 +39,22 @@
                 </tr>
             </table>
         </div>
+      <BarChart :data="this.materialData"/>
     </div>
     <ChessMoveHistory class = "move-history" :moves="move_history" />
   </section>
 </template>
 
-
-
 <script>
   import chess from '../js/chess'
   import ChessMoveHistory from '@/components/ChessMoveHistory.vue'
+  import BarChart from '@/components/BarChart.vue'
+  
   export default {
     name: 'ChessView',
     components:{
-      ChessMoveHistory
+      ChessMoveHistory,
+      BarChart,
     },
     data() {
       return {
@@ -65,7 +67,11 @@
         have_rooks_moved: [false,false,false,false],
         move_history: "",
         move_counter: 1,
-        mobile: window.innerWidth <= 768
+        mobile: window.innerWidth <= 768,
+        // the initial material values for each side
+        materialData:[
+          {color:'black', value:45},
+          {color:'white', value:45}]
       }
     },
     computed: {
@@ -162,47 +168,6 @@
         }
       },
 
-      materialBalance(){
-        
-        let material = 0;
-        if (this.active_board != null){
-            let b = this.active_board.slice(2,10).map(function(val){
-            return val.slice(2,10)
-          });
-
-          //add the values of all the pieces on the board
-          for (let i = 0; i < b.length; i++){
-            for (let j = 0; j < b[i].length; j++){
-              //if the piece is a knight we need a special case
-              if (b[i][j] == -2){
-                material = material - 3;
-              }
-              else if (b[i][j] == 2){
-                material = material + 3;
-              }
-              //if the piece is a rook we need a special case
-              else if (b[i][j] == -4){
-                material = material - 5;
-              }
-              else if (b[i][j] == 4){
-                material = material + 5;
-              }
-              //if the piece is a queen we need a special case
-              else if (b[i][j] == -5){
-                material = material - 9;
-              }
-              else if (b[i][j] == 5){
-                material = material + 9;
-              }
-              else {
-                material = material + b[i][j];
-              }
-            }
-          }
-        }
-        return material;
-      }
-
     },
     created(){
       addEventListener('resize', () =>{
@@ -212,7 +177,7 @@
     mounted(){
         this.active_board = chess.generateEmptyBoard();
         this.active_board = chess.setBoard(this.active_board);
-        console.log(this.trimmedBoard);
+        //console.log(this.materialData)
     },
     methods: {
       getPieceAsset(piece_value){
@@ -239,7 +204,7 @@
         *need to work out sides/legality of move
         */
         //store the newly clicked square
-        console.log("piece clicked")
+        //console.log("piece clicked")
         let square;
         
         //if the square has an image then its a piece and we need the td
@@ -277,7 +242,7 @@
           }
           //map to coords
           target_squares = target_squares.map(x => [x[0]-2,x[1]-2])
-          console.log(target_squares);
+          //console.log(target_squares);
           //highlight target squares
           for (let i = 0; i < target_squares.length; i++){
             target_squares[i]
@@ -301,8 +266,8 @@
           let target_row = square.parentNode.rowIndex;
           let active_col = this.active_square.cellIndex;
           let active_row = this.active_square.parentNode.rowIndex;
-          console.log("active square", this.active_board[target_row+2][target_col+2])
-          console.log("target square", this.active_board[active_row+2][active_col+2])
+          //console.log("active square", this.active_board[target_row+2][target_col+2])
+          //console.log("target square", this.active_board[active_row+2][active_col+2])
           
 
           //get legal moves of active piece
@@ -317,7 +282,7 @@
           }
 
           //check to see if the target is in the legal move list
-          console.log("legal moves", legal_moves);
+          //console.log("legal moves", legal_moves);
           let is_legal = false;
           for (let i = 0; i < legal_moves.length; i++){
             if ((legal_moves[i][0] == target_row+2) && (legal_moves[i][1] == target_col+2)){
@@ -338,29 +303,29 @@
 
           //if the moving piece is a king change flag
           if (this.active_board[active_row+2][active_col+2] == 6){
-            console.log("moved king");
+            //console.log("moved king");
             this.have_kings_moved[0] = true;
           }
           if (this.active_board[active_row+2][active_col+2] == -6){
-            console.log("moved king");
+            //console.log("moved king");
             this.have_kings_moved[1] = true;
           }
 
           //if the moving piece is a rook change flag
           if (active_row == 0 && active_col == 0){
-            console.log("moved rook");
+            //console.log("moved rook");
             this.have_rooks_moved[0] = true;
           }
           if (active_row == 0 && active_col == 7){
-            console.log("moved rook");
+            //console.log("moved rook");
             this.have_rooks_moved[1] = true;
           }
           if (active_row == 7 && active_col == 0){
-            console.log("moved rook");
+            //console.log("moved rook");
             this.have_rooks_moved[2] = true;
           }
           if (active_row == 7 && active_col == 7){
-            console.log("moved rook");
+            //console.log("moved rook");
             this.have_rooks_moved[3] = true;
           }
 
@@ -473,10 +438,58 @@
           }
 
           
-          
+          // update material balance
+          this.updateMaterials()
+          //console.log(this.materialData)
 
         }
+      },
+
+      updateMaterials: function(){
+        let black = 0;
+        let white = 0;
+        if (this.active_board != null){
+            let b = this.active_board.slice(2,10).map(function(val){
+            return val.slice(2,10)
+          });
+
+          //add the values of all the pieces on the board
+          for (let i = 0; i < b.length; i++){
+            for (let j = 0; j < b[i].length; j++){
+              //if the piece is a knight we need a special case
+              if (b[i][j] == -2){
+                black += 3;
+              }
+              else if (b[i][j] == 2){
+                white += 3;
+              }
+              //if the piece is a rook we need a special case
+              else if (b[i][j] == -4){
+                black += 5;
+              }
+              else if (b[i][j] == 4){
+                white += 5;
+              }
+              //if the piece is a queen we need a special case
+              else if (b[i][j] == -5){
+                black += 9;
+              }
+              else if (b[i][j] == 5){
+                white += 9;
+              }
+              else {
+                let val = b[i][j]
+                val < 0 ? black += val*-1 : white += val;
+              }
+            }
+          }
+        }
+        this.materialData = [
+          {color:'black', value:black},
+          {color:'white', value:white}
+          ];
       }
+
     }   
   }
 </script>
@@ -653,7 +666,6 @@
       margin: none;
       height: auto;
     }
-
 
   }
 
