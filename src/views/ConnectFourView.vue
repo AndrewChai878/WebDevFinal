@@ -9,12 +9,14 @@
     <PopUp
         :message="this.winner + ' Won!'"
         :win="true"
+        :option="1"
         v-on:response="handleResponse($event)" 
         v-if="popup && (winner != '')"
     />
     <PopUp
         :message="'Match is a draw!'"
         :win="false"
+        :option="1"
         v-on:response="handleResponse($event)" 
         v-if="popup && draw"
     />

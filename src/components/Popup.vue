@@ -2,22 +2,28 @@
 	<div class="popup" v-if="win">
         <div class="title">🎉 {{message}} 🎉</div>
         <div class="popup-inner">
-            <span class="body">Would you like to play again?</span>
-            <div class="button-container">
+            <span class="body" v-if="option == 1">Would you like to play again?</span>
+            <div class="button-container" v-if="option == 1">
                 <button class="yes" @click="this.response('yes')">Yes</button>
                 
                 <button class="no" @click="this.response('no')">No</button>
+            </div>
+            <div class="button-container" v-if="option == 2">
+                <button class="no" @click="this.response('no')">Dismiss</button>
             </div>
         </div>
 	</div>
     <div class="popup" v-else>
         <div class="title">❌ {{message}} ❌</div>
         <div class="popup-inner">
-            <span class="body">Would you like to play again?</span>
-            <div class="button-container">
+            <span class="body" v-if="option == 1">Would you like to play again?</span>
+            <div class="button-container" v-if="option == 1">
                 <button class="yes" @click="this.response('yes')">Yes</button>
                 
                 <button class="no" @click="this.response('no')">No</button>
+            </div>
+            <div class="button-container" v-if="option == 2">
+                <button class="no" @click="this.response('no')">Dismiss</button>
             </div>
         </div>
 	</div>
@@ -32,6 +38,7 @@ export default {
     props: {
         message: String,
         win: Boolean,
+        option: Number
     },
     
     methods: {

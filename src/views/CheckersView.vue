@@ -25,6 +25,7 @@
       <PopUp
         :message="this.winner + ' Won!'"
         :win="true"
+        :option="1"
         v-on:response="handleResponse($event)" 
         v-if="popup"
       />

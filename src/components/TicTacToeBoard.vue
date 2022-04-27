@@ -19,10 +19,11 @@
 import ttt from '../js/ttt'
 export default {
     name: 'TicTacToeBoard',
+    emits: ["turn", "getWinner"],
     data(){
         return{
             board: null,
-            winner: false,
+            winner: -1,
             turn: 0 // 0 is X, 1 is O
         }
     },
@@ -32,7 +33,7 @@ export default {
     methods: {
         //Adds the piece of the current player to the cell that was clicked
         move(event){
-            if(this.board[event.srcElement.id[0]][event.srcElement.id[1]] == -1 && this.winner == false){
+            if(this.board[event.srcElement.id[0]][event.srcElement.id[1]] == -1 && this.winner == -1){
                 this.board[event.srcElement.id[0]][event.srcElement.id[1]] = this.turn;
                 this.isWinner(this.turn);
                 if(this.turn == 0){
@@ -41,17 +42,15 @@ export default {
                     this.turn = 0;
                 }
                 this.$emit('turn', this.turn);
-            }else if(this.winner){
+            }else if(this.winner == -1){
                 console.log("Start a new game");
+                this.$emit('getWinner', this.winner);
             }
-            else{
-                console.log("Invalid Move");
-            }  
         },
 
         newGame(){
             this.board = ttt.newGame();
-            this.winner = false;
+            this.winner = -1;
             this.turn = 0;
             this.$emit('turn', this.turn);
             //remove winner class from cells
@@ -78,7 +77,8 @@ export default {
                     for(let j = 0; j < 3; j++){
                         document.getElementById(''+i+j).classList.add('winner');
                     }
-                    this.winner = true;
+                    this.winner = turn;
+                    this.$emit('getWinner', this.winner);
                     return;
                 }
             }
@@ -97,7 +97,8 @@ export default {
                     for(let j = 0; j < 3; j++){
                         document.getElementById(''+j+i).classList.add('winner');
                     }
-                    this.winner = true;
+                    this.winner = turn;
+                    this.$emit('getWinner', this.winner);
                     return;
                 }
             }
@@ -115,7 +116,8 @@ export default {
                 for(let i = 0; i < 3; i++){
                     document.getElementById(''+i+i).classList.add('winner');
                 }
-                this.winner = true;
+                this.winner = turn;
+                this.$emit('getWinner', this.winner);
                 return;
             }
 
@@ -132,7 +134,8 @@ export default {
                 for(let i = 0; i < 3; i++){
                     document.getElementById(''+i+(2-i)).classList.add('winner');
                 }
-                this.winner = true;
+                this.winner = turn;
+                this.$emit('getWinner', this.winner);
                 return;
             }
         }
