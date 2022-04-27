@@ -61,6 +61,7 @@ Database
 # Independent Study
 For our independent study portion, we used firebase. Firebase is an API created by google that contains many features. 
 In our case we use its features for these purposes:
+
 Authentication
 -   Firebase Authentication combined with Firebase Realtime Database is used to let users create accounts and login.
     It stores passwords in a way makes it so that each users password is stored safely and cannot be accessed by anyone (including us).
