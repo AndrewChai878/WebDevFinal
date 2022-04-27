@@ -83,4 +83,13 @@
     display: flex;
 }
 
+@media screen and (max-width: 800px) {
+    .container {
+        display: block;
+    }
+    .board {
+        display: block;
+    }
+}
+
 </style>

@@ -8,9 +8,9 @@
                 </td>
             </tr>
         </table>
-    </div>
-    <div class = "button">
-        <button @click="newGame">New Game</button>
+        <div class = "button">
+            <button @click="newGame">New Game</button>
+        </div>
     </div>
 </template>
 
@@ -157,6 +157,11 @@ table{
     padding: auto;
 }
 
+.tttBoard{
+    display: flex;
+    flex-direction: row;;
+}
+
 td:hover{
     background-color: rgba($color: aqua, $alpha: 0.3);
 }
@@ -180,5 +185,36 @@ td{
 
 .winner{
     background-color: rgba($color: red, $alpha: 0.5);
+}
+
+/* Responsive layout*/
+@media screen and (max-width: 800px) {
+    table{
+        background-image: url(../assets/tictactoe/board.png);
+        width: 40vh;
+        height: 40vh;
+        border-collapse: collapse;
+        margin: auto;
+        padding: auto;
+    }
+
+    table img {
+        width: 70%;
+        height: 70%;
+    }
+
+    td {
+    width: 33.33%;
+    height: 33.33%;
+    }
+
+    td:hover {
+        background-color: rgba($color: aqua, $alpha: 0.3);
+    }
+
+    .button button{
+        padding: 5% 15%;
+    }
+
 }
 </style>
