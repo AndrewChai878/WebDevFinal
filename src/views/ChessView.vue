@@ -5,14 +5,14 @@
               Game Information<br> <br>
             </p>
             <div class = "game-turn">
-              <p>
+              <p v-if="gameDone">
                 {{gameOver}} <br> <br>
               </p>
-              <p>
+              <p v-if="!gameDone">
                 {{playerTurn}} <br> <br>
               </p>
-              <p>
-                {{inCheck}}  <br> <br>
+              <p v-if="inCheck">
+                {{whoCheck}}  <br> <br>
               </p>
             </div>
     </div>
@@ -65,7 +65,7 @@
         have_rooks_moved: [false,false,false,false],
         move_history: "",
         move_counter: 1,
-        mobile: window.innerWidth <= 784
+        mobile: window.innerWidth <= 768
       }
     },
     computed: {
@@ -77,6 +77,22 @@
       },
 
       inCheck(){
+        if (this.active_board != null){
+          if (chess.kingInCheck(this.active_board, 1)){
+            return true;
+          }
+          else if (chess.kingInCheck(this.active_board, -1)){
+            return true;
+          }
+          else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      },
+
+      whoCheck(){
         if (this.active_board != null){
           if (chess.kingInCheck(this.active_board, 1)){
             return "In Check: White";
@@ -190,7 +206,7 @@
     },
     created(){
       addEventListener('resize', () =>{
-        this.mobile = innerWidth <= 784;
+        this.mobile = innerWidth <= 768;
       })
     },
     mounted(){
@@ -487,6 +503,7 @@
     margin-right: 2.5vw;
     margin-top: 5vw;
     margin-bottom: 5vw;
+    height: 60vh;
   }
 
   .game-turn p{
@@ -568,6 +585,7 @@
     margin-right: 2.5vw;
     margin-top: 5vw;
     margin-bottom: 5vw;
+    height: 60vh;
     overflow: auto;
     white-space: pre;
     display: flex;
@@ -633,6 +651,7 @@
       grid-row: 3;
       padding: none;
       margin: none;
+      height: auto;
     }
 
 
