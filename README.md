@@ -46,6 +46,7 @@ CSS and CSS frameworks
 
 JavaScript, jQuery, D3
 -   Ours games are created entirely in JavaScript
+-   There is an SVG chart made with D3 on the Chess page
 -   Though jQuery is not really needed in a Vue project, to showcase the ability to use it, it has been used multiple times
     in UserSettingsView.vue
 
