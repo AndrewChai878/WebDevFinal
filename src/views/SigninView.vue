@@ -1,14 +1,14 @@
 <template>
   <div class = "sign-in">
     <form>
-      <input type="email" placeholder="email" v-model="email"/> 
+      <input type="email" id="email" placeholder="email" v-model="email"/> 
       <br>
       <div class = "passwordSection">
-        <input type="password" placeholder="password" v-model="password"/>
+        <input type="password" id="password" placeholder="password" v-model="password"/>
         <button class="link" style="background:none; border:none; padding: 0px; margin: 0px; text-align: right;" v-on:click="forgotPassword()">Forgot Password</button>
       </div>
       <br>
-      <button type="button" v-on:click="login()">Login</button>
+      <button type="button" id="login" v-on:click="login()">Login</button>
       <br>
       <button type="button" v-on:click="register()">Sign up</button>
     </form>
@@ -27,10 +27,42 @@ import 'firebase/compat/storage';
         email: "",
         password: ""
     };},
+    mounted(){
+            document.getElementById("email").addEventListener("keypress", function(e) {
+        if(e.key == "Enter"){
+          e.preventDefault();
+  }
+})
+      document.getElementById("password").addEventListener("keypress", function(e) {
+        if(e.key == "Enter"){
+          e.preventDefault();
+
+          this.email = document.getElementById("email").value
+          this.password = document.getElementById("password").value
+                    console.log(this.email, document.getElementById("password").value)
+          firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(()=> {
+              console.log("Logged in!")
+              this.$router.push('/');
+              alert("Logged in!")}).catch(() => {
+                console.log("Login failure!")
+                alert("Login failure!")});
+  }
+})
+  },
     methods: {
+      forgotPassword() {
+      if(this.email == "" || this.email == null){
+        alert("Please enter your email in the email box!")
+      } else {
+        firebase.auth().sendPasswordResetEmail(this.email)
+        alert("Please check your email for a password recovery email!\nMake sure you check your spam mail if not found!")
+      }
+
+    },
     login() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(()=> {
         console.log("Logged in!")
+        this.$router.push('/');
         alert("Logged in!")}).catch(() => {
           console.log("Login failure!")
           alert("Login failure!")});
@@ -41,6 +73,7 @@ import 'firebase/compat/storage';
     }
   }
   }
+
 
   
 </script>
