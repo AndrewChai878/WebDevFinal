@@ -64,8 +64,9 @@ import 'firebase/compat/storage';
 </script>
 
 <style scoped lang="scss">
+
   .register {
-    padding: 10% 0%;
+    padding: 5% 0%;
     text-align: center;
     width: 100%;
   }
@@ -91,4 +92,14 @@ import 'firebase/compat/storage';
   ::placeholder {
     color: #DA0037;
   }
+
+    /* Responsive layout*/
+    @media screen and (max-width: 800px) {
+    .register input {
+        width: 50%;
+    }
+    .register button {
+        width: 50%;
+    }
+    }
 </style>

@@ -5,7 +5,7 @@
       <br>
       <div class = "passwordSection">
         <input type="password" placeholder="password" v-model="password"/>
-        <button class="link" style="background:none; border:none; padding: 0px; margin: 0px; text-align: right; " v-on:click="forgotPassword()">Forgot Password</button>
+        <button class="link" style="background:none; border:none; padding: 0px; margin: 0px; text-align: right;" v-on:click="forgotPassword()">Forgot Password</button>
       </div>
       <br>
       <button type="button" v-on:click="login()">Login</button>
@@ -55,9 +55,8 @@ import 'firebase/compat/storage';
   }
 
   .sign-in {
-    padding: 10% 0%;
+    padding: 5% 0%;
     text-align: center;
-    width: 100%;
   }
 
   .sign-in input {
@@ -81,4 +80,14 @@ import 'firebase/compat/storage';
   ::placeholder {
     color: #DA0037;
   }
+
+  /* Responsive layout*/
+@media screen and (max-width: 800px) {
+  .sign-in input {
+    width: 50%;
+  }
+  .sign-in button {
+    width: 50%;
+  }
+}
 </style>
