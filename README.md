@@ -84,3 +84,21 @@ Hosting
 -   Firebase Hosting keeps the website running 24/7 without having to run it ourselves with npm run serve. The website is currently hosted at
     https://webdevfinal-e9585.web.app/
     (the node.js server still has to be run manually)
+
+# Things We Thing Are Cool
+-   Animated Quotes!
+![Animated Quotes](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/animated_text.gif)
+-   Sign Up!
+![Signup](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/sign_in.gif)
+-   Swap Your Profile Picture!
+![Profile Picture](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/Swap_Profile_Picture.gif)
+-   Swap Your Display Name!
+![Display Name](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/display_name.gif)
+-   Play Checkers!
+![Checkers](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/checkers-win.gif)
+-   Play Chess (on your phone as well)!
+![Chess](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/chess_mobile.gif)
+-   Play Connect 4!
+![Connect 4](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/connect4_win.gif)
+-   Play TicTacToe!
+![TicTacToe](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/gifs/tic_tac_toe_win.gif)
