@@ -58,3 +58,18 @@ Views and/or client-side framework
 Database
 -   We implemented firebase authentication and firestore as our database and independent study portion of the project
 
+# Independent Study
+For our independent study portion, we used firebase. Firebase is an API created by google that contains many features. 
+In our case we use its features for these purposes:
+Authentication
+-   Firebase Authentication combined with Firebase Realtime Database is used to let users create accounts and login.
+    It stores passwords in a way makes it so that each users password is stored safely and cannot be accessed by anyone (including us).
+
+Information
+-   Firebase Realtime Database alongside Firebase Storage allows us to store information about the user such as their display name.
+    This lets users do things like change and set their profile picture by uploading it personally or changing their display name on the website.   
+
+Hosting
+-   Firebase Hosting keeps the website running 24/7 without having to run it ourselves with npm run serve. The website is currently hosted at
+    https://webdevfinal-e9585.web.app/
+    (the node.js server still has to be run manually)
