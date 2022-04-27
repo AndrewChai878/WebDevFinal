@@ -484,6 +484,19 @@
             }
           }
         }
+        if (this.gameOver == "White Is Checkmated"){
+          black = 9001;
+          white = 0;
+        }
+        if (this.gameOver == "Black Is Checkmated"){
+          black = 0;
+          white = 9001;
+        }
+        if (this.gameOver == "Draw! White Is Stalemated" || this.gameOver == "Draw! Black Is Stalemated"){
+          black = 0;
+          white = 0;
+        }
+
         this.materialData = [
           {color:'black', value:black},
           {color:'white', value:white}
