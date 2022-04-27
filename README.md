@@ -85,7 +85,7 @@ Hosting
     https://webdevfinal-e9585.web.app/
     (the node.js server still has to be run manually)
     
-Presentaion File
+Presentation File
 
 https://docs.google.com/presentation/d/1bHrRHbIyKQju-FpWhkQ8XGzZlKGQkAAAWPHDS5XHu78/edit?usp=sharing
 
