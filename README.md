@@ -13,7 +13,7 @@ Group Members
 
 | Andrew Chai | AndrewChai878 (https://github.com/AndrewChai878)
 
-(https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/branding/logo.svg)
+![logo](https://github.com/AndrewChai878/WebDevFinal/blob/main/src/assets/branding/logo.svg)
 
 # Description
 Welcome to checkmate games!
