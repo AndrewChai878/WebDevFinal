@@ -3,8 +3,8 @@
     <tr v-for="(row,i) in this.board" :key="i">
         <td v-for="(column,j) in row" :key="j" :id="''+i+j">
             <img v-if="this.board[i][j] == 0" class="coin" src="../assets/connect4/Empty.svg" @click="dropPiece($event)"/>
-            <img v-if="this.board[i][j] == 1" class="coin animate__animated animate__bounceInDown" src="../assets/connect4/Red.svg" @click="dropPiece($event)"/>
-            <img v-else-if="this.board[i][j] == 2" class="coin animate__animated animate__bounceInDown" src="../assets/connect4/Yellow.svg" @click="dropPiece($event)"/>
+            <img v-if="this.board[i][j] == 1" class="coin" src="../assets/connect4/Red.svg" @click="dropPiece($event)"/>
+            <img v-else-if="this.board[i][j] == 2" class="coin" src="../assets/connect4/Yellow.svg" @click="dropPiece($event)"/>
         </td>
     </tr>
 </table>
@@ -13,7 +13,6 @@
 
 <script>
 import connect4 from '../js/connect4'
-import 'animate.css'
 
     export default{
         name: 'ConnectFourBoard',
