@@ -46,6 +46,8 @@ CSS and CSS frameworks
 
 JavaScript, jQuery, D3
 -   Ours games are created entirely in javascript
+-   Though JQuery is not really needed in a vue project, to showcase the ability to use it, it has been used multiple times
+    in UserSettingsView.vue
 
 DHTML
 -   We use vue and javascript to make our html based views dynamically interact with users allowing them to play games.
